@@ -8,6 +8,7 @@ interface Testimonial {
   text: string;
   rating: number;
   featured: boolean;
+  imageUrl?: string | null;
 }
 
 interface TestimonialFormProps {
@@ -22,6 +23,7 @@ export default function TestimonialForm({ testimonial, onClose, onSave }: Testim
     text: '',
     rating: 5,
     featured: false,
+    imageUrl: '',
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -33,6 +35,7 @@ export default function TestimonialForm({ testimonial, onClose, onSave }: Testim
         text: testimonial.text,
         rating: testimonial.rating,
         featured: testimonial.featured,
+        imageUrl: testimonial.imageUrl || '',
       });
     }
   }, [testimonial]);
@@ -122,6 +125,19 @@ export default function TestimonialForm({ testimonial, onClose, onSave }: Testim
             <p className="text-sm text-text-primary/70 mt-2">
               Selected: {formData.rating} star{formData.rating !== 1 ? 's' : ''}
             </p>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-text-primary mb-2">
+              Image URL (optional)
+            </label>
+            <input
+              type="url"
+              value={formData.imageUrl}
+              onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
+              placeholder="https://..."
+              className="w-full px-4 py-2 border-2 border-primary-1 rounded-lg focus:outline-none focus:border-primary-2"
+            />
           </div>
 
           <div className="flex items-center gap-2">

@@ -29,6 +29,7 @@ model Testimonial {
   text      String
   rating    Int      @default(5) // 1-5 stars
   featured  Boolean  @default(false)
+  imageUrl  String?  // Optional avatar or photo URL
   createdAt DateTime @default(now())
 }
 

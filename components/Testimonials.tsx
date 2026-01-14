@@ -3,6 +3,7 @@ interface Testimonial {
   name: string;
   text: string;
   rating: number;
+  imageUrl?: string | null;
 }
 
 interface TestimonialsProps {
@@ -25,21 +26,29 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
               key={testimonial.id}
               className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300"
             >
-              {/* Stars */}
-              <div className="flex gap-1 mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <span key={i} className="text-yellow-400 text-xl">★</span>
-                ))}
+              <div className="flex items-center gap-4 mb-4">
+                {testimonial.imageUrl && (
+                  <img
+                    src={testimonial.imageUrl}
+                    alt={testimonial.name}
+                    className="w-12 h-12 rounded-full object-cover"
+                  />
+                )}
+                <div>
+                  <div className="flex gap-1 mb-1">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <span key={i} className="text-yellow-400 text-xl">★</span>
+                    ))}
+                  </div>
+                  <p className="text-text-primary font-semibold">
+                    — {testimonial.name}
+                  </p>
+                </div>
               </div>
 
               {/* Testimonial Text */}
-              <p className="text-text-primary/80 mb-6 italic leading-relaxed">
-                "{testimonial.text}"
-              </p>
-
-              {/* Author */}
-              <p className="text-text-primary font-semibold">
-                — {testimonial.name}
+              <p className="text-text-primary/80 italic leading-relaxed">
+                {`“${testimonial.text}”`}
               </p>
             </div>
           ))}

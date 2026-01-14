@@ -17,6 +17,7 @@ export async function PUT(
         text: data.text,
         rating: data.rating || 5,
         featured: data.featured || false,
+        imageUrl: data.imageUrl || null,
       },
     });
     return NextResponse.json(testimonial);

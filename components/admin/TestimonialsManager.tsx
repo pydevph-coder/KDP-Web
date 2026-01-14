@@ -9,6 +9,7 @@ interface Testimonial {
   text: string;
   rating: number;
   featured: boolean;
+  imageUrl?: string | null;
 }
 
 export default function TestimonialsManager() {
@@ -101,14 +102,23 @@ export default function TestimonialsManager() {
               className="bg-white rounded-2xl p-6 shadow-lg"
             >
               <div className="flex justify-between items-start mb-4">
-                <div>
-                  <h3 className="font-bold text-lg text-text-primary mb-1">
-                    {testimonial.name}
-                  </h3>
-                  <div className="flex gap-1 mb-2">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <span key={i} className="text-yellow-400">★</span>
-                    ))}
+                <div className="flex items-center gap-4">
+                  {testimonial.imageUrl && (
+                    <img
+                      src={testimonial.imageUrl}
+                      alt={testimonial.name}
+                      className="w-12 h-12 rounded-full object-cover"
+                    />
+                  )}
+                  <div>
+                    <h3 className="font-bold text-lg text-text-primary mb-1">
+                      {testimonial.name}
+                    </h3>
+                    <div className="flex gap-1 mb-2">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <span key={i} className="text-yellow-400">★</span>
+                      ))}
+                    </div>
                   </div>
                 </div>
                 {testimonial.featured && (
