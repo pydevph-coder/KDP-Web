@@ -8,11 +8,12 @@ import EmailSignup from '@/components/EmailSignup';
 import Footer from '@/components/Footer';
 import StickyCTA from '@/components/StickyCTA';
 import { prisma } from '@/lib/prisma';
+import type { Author, Book, Testimonial } from '@prisma/client';
 
 export default async function Home() {
-  let books = [];
-  let testimonials = [];
-  let author = null;
+  let books: Book[] = [];
+  let testimonials: Testimonial[] = [];
+  let author: Author | null = null;
 
   try {
     books = await prisma.book.findMany({

@@ -21,6 +21,8 @@ model Book {
   order       Int      @default(0) // For ordering books
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  clicks Click[]
 }
 
 model Testimonial {
@@ -29,7 +31,7 @@ model Testimonial {
   text      String
   rating    Int      @default(5) // 1-5 stars
   featured  Boolean  @default(false)
-  imageUrl  String?  // Optional avatar or photo URL
+  imageUrl  String? // Optional avatar or photo URL
   createdAt DateTime @default(now())
 }
 
@@ -37,8 +39,8 @@ model Author {
   id          String   @id @default(cuid())
   name        String
   bio         String
-  photo       String?  // Optional photo URL
-  credentials String?  // e.g., "Licensed Guidance Counselor"
+  photo       String? // Optional photo URL
+  credentials String? // e.g., "Licensed Guidance Counselor"
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
@@ -52,13 +54,12 @@ model EmailSubscriber {
 model Click {
   id        String   @id @default(cuid())
   bookId    String?
-  link      String   // Amazon link or other link clicked
+  link      String // Amazon link or other link clicked
   source    String   @default("unknown") // e.g., "hero", "showcase", "sticky"
   createdAt DateTime @default(now())
-  
-  book      Book?    @relation(fields: [bookId], references: [id], onDelete: Cascade)
-  
+
+  book Book? @relation(fields: [bookId], references: [id], onDelete: Cascade)
+
   @@index([bookId])
   @@index([createdAt])
 }
-
