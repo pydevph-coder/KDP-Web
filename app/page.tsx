@@ -10,18 +10,27 @@ import StickyCTA from '@/components/StickyCTA';
 import { prisma } from '@/lib/prisma';
 
 export default async function Home() {
-  const books = await prisma.book.findMany({
-    where: { featured: true },
-    orderBy: { order: 'asc' },
-  });
+  let books = [];
+  let testimonials = [];
+  let author = null;
 
-  const testimonials = await prisma.testimonial.findMany({
-    where: { featured: true },
-    orderBy: { createdAt: 'desc' },
-    take: 3,
-  });
+  try {
+    books = await prisma.book.findMany({
+      where: { featured: true },
+      orderBy: { order: 'asc' },
+    });
 
-  const author = await prisma.author.findFirst();
+    testimonials = await prisma.testimonial.findMany({
+      where: { featured: true },
+      orderBy: { createdAt: 'desc' },
+      take: 3,
+    });
+
+    author = await prisma.author.findFirst();
+  } catch (error) {
+    console.error('Database error:', error);
+    // Continue rendering with empty data
+  }
 
   return (
     <main className="min-h-screen">
