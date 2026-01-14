@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Book {
+  id          String   @id @default(cuid())
+  title       String
+  coverImage  String
+  description String
+  amazonLink  String
+  benefits    String[] // Array of benefit bullets
+  featured    Boolean  @default(false)
+  order       Int      @default(0) // For ordering books
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  text      String
+  rating    Int      @default(5) // 1-5 stars
+  featured  Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Author {
+  id          String   @id @default(cuid())
+  name        String
+  bio         String
+  photo       String?  // Optional photo URL
+  credentials String?  // e.g., "Licensed Guidance Counselor"
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model EmailSubscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+}
+
+model Click {
+  id        String   @id @default(cuid())
+  bookId    String?
+  link      String   // Amazon link or other link clicked
+  source    String   @default("unknown") // e.g., "hero", "showcase", "sticky"
+  createdAt DateTime @default(now())
+  
+  book      Book?    @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  
+  @@index([bookId])
+  @@index([createdAt])
+}
+
