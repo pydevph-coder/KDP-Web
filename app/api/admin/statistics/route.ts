@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { requireAuth } from '@/lib/auth';
 
+export const dynamic = 'force-dynamic';
+
 type ClicksBySourceItem = {
   source: string;
   _count: number;
@@ -21,7 +23,11 @@ type RecentClickItem = {
 };
 
 export async function GET() {
-  await requireAuth();
+  try {
+    await requireAuth();
+  } catch {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
 
   try {
     const [
