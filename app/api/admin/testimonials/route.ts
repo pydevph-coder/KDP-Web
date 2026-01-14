@@ -2,8 +2,14 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { requireAuth } from '@/lib/auth';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
-  await requireAuth();
+  try {
+    await requireAuth();
+  } catch {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
 
   try {
     const testimonials = await prisma.testimonial.findMany({
@@ -19,7 +25,11 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
-  await requireAuth();
+  try {
+    await requireAuth();
+  } catch {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
 
   try {
     const data = await request.json();
