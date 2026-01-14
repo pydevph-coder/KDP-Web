@@ -41,7 +41,7 @@ export async function GET() {
 
     // Get book titles for clicks by book
     const clicksByBookWithTitles = await Promise.all(
-      clicksByBook.map(async (item) => {
+      clicksByBook.map(async (item: { bookId: string; _count: number }) => {
         if (!item.bookId) return null;
         const book = await prisma.book.findUnique({
           where: { id: item.bookId },
