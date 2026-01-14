@@ -118,7 +118,7 @@ export default function TestimonialsManager() {
                 )}
               </div>
               <p className="text-text-primary/70 mb-4 italic">
-                "{testimonial.text}"
+                {`“${testimonial.text}”`}
               </p>
               <div className="flex gap-2">
                 <button

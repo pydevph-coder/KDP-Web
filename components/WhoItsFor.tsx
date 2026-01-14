@@ -7,7 +7,7 @@ export default function WhoItsFor() {
     },
     {
       title: 'Teens',
-      description: 'Navigate life\'s challenges with faith-based guidance and journaling.',
+      description: "Navigate life\u2019s challenges with faith-based guidance and journaling.",
       icon: '👧',
     },
     {
@@ -26,7 +26,7 @@ export default function WhoItsFor() {
     <section className="py-20 px-4 bg-gradient-to-br from-background-1 to-background-2">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-bold text-center text-text-primary mb-4">
-          Who It's For
+          {'Who It\u2019s For'}
         </h2>
         <p className="text-xl text-center text-text-primary/70 mb-16 max-w-3xl mx-auto">
           These books are designed for anyone seeking to grow in faith and find peace in their daily lives.

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 interface Book {
   id: string;
@@ -133,14 +134,17 @@ export default function BookForm({ book, onClose, onSave }: BookFormProps) {
               className="w-full px-4 py-2 border-2 border-primary-1 rounded-lg focus:outline-none focus:border-primary-2"
             />
             {formData.coverImage && (
-              <img
-                src={formData.coverImage}
-                alt="Preview"
-                className="mt-2 w-32 h-48 object-cover rounded"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = 'none';
-                }}
-              />
+              <div className="mt-2 w-32 h-48 relative">
+                <Image
+                  src={formData.coverImage}
+                  alt="Preview"
+                  fill
+                  className="object-cover rounded"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).style.display = 'none';
+                  }}
+                />
+              </div>
             )}
           </div>
 
