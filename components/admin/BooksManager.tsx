@@ -83,9 +83,9 @@ export default function BooksManager() {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-text-primary">Books</h2>
-        <button onClick={handleCreate} className="btn-primary">
+      <div className="flex justify-between items-center gap-3 mb-6">
+        <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-text-primary">Books</h2>
+        <button onClick={handleCreate} className="bg-primary-1 hover:bg-primary-2 active:bg-primary-2 text-white font-semibold py-1.5 sm:py-2 md:py-3 px-3 sm:px-4 md:px-6 rounded-full transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 text-xs sm:text-sm md:text-base">
           Add New Book
         </button>
       </div>

@@ -75,9 +75,9 @@ export default function TestimonialsManager() {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-text-primary">Testimonials</h2>
-        <button onClick={handleCreate} className="btn-primary">
+      <div className="flex justify-between items-center gap-3 mb-6">
+        <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-text-primary">Testimonials</h2>
+        <button onClick={handleCreate} className="bg-primary-1 hover:bg-primary-2 active:bg-primary-2 text-white font-semibold py-1.5 sm:py-2 md:py-3 px-3 sm:px-4 md:px-6 rounded-full transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 text-xs sm:text-sm md:text-base">
           Add New Testimonial
         </button>
       </div>
@@ -128,18 +128,18 @@ export default function TestimonialsManager() {
                 )}
               </div>
               <p className="text-text-primary/70 mb-4 italic">
-                {`“${testimonial.text}”`}
+                {`"${testimonial.text}"`}
               </p>
-              <div className="flex gap-2">
+              <div className="flex gap-2 justify-end">
                 <button
                   onClick={() => handleEdit(testimonial)}
-                  className="flex-1 px-4 py-2 bg-primary-1 text-white rounded-lg hover:bg-primary-2 transition-colors"
+                  className="px-3 py-1.5 sm:px-4 sm:py-2 bg-primary-1 text-white text-xs sm:text-sm rounded-lg hover:bg-primary-2 transition-colors"
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => handleDelete(testimonial.id)}
-                  className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+                  className="px-3 py-1.5 sm:px-4 sm:py-2 bg-red-500 text-white text-xs sm:text-sm rounded-lg hover:bg-red-600 transition-colors"
                 >
                   Delete
                 </button>

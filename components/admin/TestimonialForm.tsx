@@ -71,9 +71,9 @@ export default function TestimonialForm({ testimonial, onClose, onSave }: Testim
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl max-w-2xl w-full p-8">
-        <h2 className="text-2xl font-bold text-text-primary mb-6">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-2 sm:p-4">
+      <div className="bg-white rounded-xl sm:rounded-2xl max-w-2xl w-full p-4 sm:p-6 md:p-8 max-h-[90vh] overflow-y-auto">
+        <h2 className="text-xl sm:text-2xl font-bold text-text-primary mb-4 sm:mb-6">
           {testimonial ? 'Edit Testimonial' : 'Add New Testimonial'}
         </h2>
 
@@ -154,18 +154,18 @@ export default function TestimonialForm({ testimonial, onClose, onSave }: Testim
             <p className="text-red-600">{error}</p>
           )}
 
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center items-center">
             <button
               type="submit"
               disabled={loading}
-              className="btn-primary flex-1 disabled:opacity-50"
+              className="bg-primary-1 hover:bg-primary-2 active:bg-primary-2 text-white font-semibold py-2 sm:py-3 md:py-4 px-4 sm:px-6 md:px-8 rounded-full transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 disabled:opacity-50 text-sm sm:text-base w-[70%] sm:w-[35%]"
             >
               {loading ? 'Saving...' : testimonial ? 'Update Testimonial' : 'Create Testimonial'}
             </button>
             <button
               type="button"
               onClick={onClose}
-              className="btn-secondary"
+              className="bg-white hover:bg-background-2 active:bg-background-2 text-primary-1 font-semibold py-2 sm:py-3 md:py-4 px-4 sm:px-6 md:px-8 rounded-full transition-all duration-300 border-2 border-primary-1 hover:border-primary-2 active:scale-95 text-sm sm:text-base w-[70%] sm:w-[35%]"
             >
               Cancel
             </button>

@@ -102,9 +102,9 @@ export default function BookForm({ book, onClose, onSave }: BookFormProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-8">
-        <h2 className="text-2xl font-bold text-text-primary mb-6">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-2 sm:p-4">
+      <div className="bg-white rounded-xl sm:rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-4 sm:p-6 md:p-8">
+        <h2 className="text-xl sm:text-2xl font-bold text-text-primary mb-4 sm:mb-6">
           {book ? 'Edit Book' : 'Add New Book'}
         </h2>
 
@@ -134,7 +134,7 @@ export default function BookForm({ book, onClose, onSave }: BookFormProps) {
               className="w-full px-4 py-2 border-2 border-primary-1 rounded-lg focus:outline-none focus:border-primary-2"
             />
             {formData.coverImage && (
-              <div className="mt-2 w-32 h-48 relative">
+              <div className="mt-2 w-32 h-48 relative mx-auto">
                 <Image
                   src={formData.coverImage}
                   alt="Preview"
@@ -191,7 +191,7 @@ export default function BookForm({ book, onClose, onSave }: BookFormProps) {
                   <button
                     type="button"
                     onClick={() => removeBenefit(index)}
-                    className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+                    className="px-3 py-1.5 sm:px-4 sm:py-2 bg-red-500 text-white text-xs sm:text-sm rounded-lg hover:bg-red-600 transition-colors"
                   >
                     Remove
                   </button>
@@ -201,7 +201,7 @@ export default function BookForm({ book, onClose, onSave }: BookFormProps) {
             <button
               type="button"
               onClick={addBenefit}
-              className="mt-2 px-4 py-2 bg-primary-2 text-white rounded-lg hover:bg-primary-1"
+              className="mt-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-primary-2 text-white text-xs sm:text-sm rounded-lg hover:bg-primary-1 transition-colors"
             >
               Add Benefit
             </button>
@@ -235,18 +235,18 @@ export default function BookForm({ book, onClose, onSave }: BookFormProps) {
             <p className="text-red-600">{error}</p>
           )}
 
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center items-center">
             <button
               type="submit"
               disabled={loading}
-              className="btn-primary flex-1 disabled:opacity-50"
+              className="bg-primary-1 hover:bg-primary-2 active:bg-primary-2 text-white font-semibold py-2 sm:py-3 md:py-4 px-4 sm:px-6 md:px-8 rounded-full transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 disabled:opacity-50 text-sm sm:text-base w-[70%] sm:w-[35%]"
             >
               {loading ? 'Saving...' : book ? 'Update Book' : 'Create Book'}
             </button>
             <button
               type="button"
               onClick={onClose}
-              className="btn-secondary"
+              className="bg-white hover:bg-background-2 active:bg-background-2 text-primary-1 font-semibold py-2 sm:py-3 md:py-4 px-4 sm:px-6 md:px-8 rounded-full transition-all duration-300 border-2 border-primary-1 hover:border-primary-2 active:scale-95 text-sm sm:text-base w-[70%] sm:w-[35%]"
             >
               Cancel
             </button>
