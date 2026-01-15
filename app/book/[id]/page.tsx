@@ -25,7 +25,10 @@ interface Author {
   id: string;
   name: string;
   bio: string;
-  image: string;
+  photo: string;
+  credentials: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 async function getBook(id: string) {
   try {
