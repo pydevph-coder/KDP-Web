@@ -16,8 +16,10 @@ interface BookDetailsPageProps {
 interface Testimonial {
     id: string;
     name: string;
-    message: string;
+    text: string;
+    rating: number;
     createdAt: string;
+    featured: boolean;
   }
 interface Author {
   id: string;
