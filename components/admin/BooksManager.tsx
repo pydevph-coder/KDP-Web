@@ -7,8 +7,8 @@ import BookList from "./BookList";
 
 export interface FullBook {
   id: string;
-  createdAt: string; // Dates from fetch will be strings
-  updatedAt: string;
+  createdAt: Date; // Dates from fetch will be strings
+  updatedAt: Date;
   slug: string | null;
   title: string;
   coverImage: string;
