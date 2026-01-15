@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import BookForm from './BookForm';
 import BookList from './BookList';
 import type { Book } from "@prisma/client";
-const [editingBook, setEditingBook] = useState<Book | null>(null);
+
 
 export default function BooksManager() {
   const [books, setBooks] = useState<Book[]>([]);
