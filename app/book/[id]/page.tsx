@@ -18,7 +18,7 @@ interface Testimonial {
     name: string;
     text: string;
     rating: number;
-    createdAt: string;
+    createdAt: Date;
     featured: boolean;
   }
 interface Author {
