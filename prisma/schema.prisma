@@ -34,7 +34,7 @@ model Book {
   updatedAt             DateTime @updatedAt
 
   clicks Click[]
-}
+}  
 
 model Testimonial {
   id        String   @id @default(cuid())
