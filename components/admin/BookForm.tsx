@@ -242,7 +242,7 @@ export default function BookForm({ book, onClose, onSave }: BookFormProps) {
               {/* Pain Points Section */}
               <div>
                 <label className="block text-sm font-medium text-text-primary mb-2">
-                  Section 1 Header (e.g., "You're Not Alone, Teen" or "You're Not Alone, Mama")
+                {`Section 1 Header (e.g., "You're Not Alone, Teen" or "You're Not Alone, Mama")`}
                 </label>
                 <input
                   type="text"
@@ -267,7 +267,7 @@ export default function BookForm({ book, onClose, onSave }: BookFormProps) {
               {/* Benefits Section */}
               <div>
                 <label className="block text-sm font-medium text-text-primary mb-2">
-                  Section 2 Header (e.g., "How This Workbook Will Help You" or "How This Journal Will Support You")
+                {`Section 2 Header (e.g., "How This Workbook Will Help You" or "How This Journal Will Support You")`}
                 </label>
                 <input
                   type="text"
@@ -292,7 +292,7 @@ export default function BookForm({ book, onClose, onSave }: BookFormProps) {
               {/* Features Section */}
               <div>
                 <label className="block text-sm font-medium text-text-primary mb-2">
-                  Section 3 Header (e.g., "What You'll Find Inside" or "What You'll Discover Inside")
+                {`Section 3 Header (e.g., "What You'll Find Inside" or "What You'll Discover Inside")`}
                 </label>
                 <input
                   type="text"
@@ -317,7 +317,7 @@ export default function BookForm({ book, onClose, onSave }: BookFormProps) {
               {/* Target Audience Section */}
               <div>
                 <label className="block text-sm font-medium text-text-primary mb-2">
-                  Section 4 Header (e.g., "This Workbook Is For You If..." or "This Journal Is For You If...")
+                {`Section 4 Header (e.g., "This Workbook Is For You If..." or "This Journal Is For You If...")`}
                 </label>
                 <input
                   type="text"
@@ -342,7 +342,7 @@ export default function BookForm({ book, onClose, onSave }: BookFormProps) {
               {/* Faith Message Section */}
               <div>
                 <label className="block text-sm font-medium text-text-primary mb-2">
-                  Section 5 Header (e.g., "Faith That Supports, Not Pressures" or "Rooted in Faith & Grace")
+                {`Section 5 Header (e.g., "Faith That Supports, Not Pressures" or "Rooted in Faith & Grace")`}
                 </label>
                 <input
                   type="text"

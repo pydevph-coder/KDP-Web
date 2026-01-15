@@ -18,7 +18,7 @@ export default async function BookNotFound() {
             Book Not Found
           </h1>
           <p className="text-lg sm:text-xl text-text-primary/70 mb-8">
-            Sorry, we couldn't find the book you're looking for.
+            Sorry, we couldn&apos;t find the book you&apos;re looking for.
           </p>
           <Link
             href="/"
