@@ -7,11 +7,15 @@ import Testimonials from '@/components/Testimonials';
 import AboutAuthor from '@/components/AboutAuthor';
 import EmailSignup from '@/components/EmailSignup';
 import type { Metadata } from 'next';
+import type { Author } from '@prisma/client';
 
 export const dynamic = 'force-dynamic';
 
 interface BookDetailsPageProps {
   params: { id: string };
+}
+interface AboutAuthorProps {
+  author: Author | null;
 }
 interface Testimonial {
     id: string;
@@ -21,15 +25,7 @@ interface Testimonial {
     createdAt: Date;
     featured: boolean;
   }
-interface Author {
-  id: string;
-  name?: string | null;
-  bio?: string | null;
-  photo?: string | null ;
-  credentials?: string | null;
-  createdAt?: Date;
-  updatedAt?: Date;
-}
+
 async function getBook(id: string) {
   try {
     const book = await prisma.book.findUnique({
