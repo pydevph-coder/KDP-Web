@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { trackClick } from '@/lib/analytics';
-
+import Image from 'next/image';
 interface Book {
   id: string;
   amazonLink: string;
@@ -28,8 +28,15 @@ export default function Header({ books }: HeaderProps) {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 sm:gap-3 group">
-            <div className="relative w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-primary-1 to-primary-2 rounded-lg sm:rounded-xl flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
-              <span className="text-white font-bold text-lg sm:text-xl">F</span>
+          <div className="relative w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-primary-1 to-primary-2 rounded-full flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow overflow-hidden">
+            <Image
+                src="https://m.media-amazon.com/images/S/amzn-author-media-prod/nrd5rhnko6vcv1o0jt733o1oau._SY600_._SL200_._PQ50_._FMwebp_.jpg"
+                alt="Logo"
+                fill
+                className="object-contain"
+                sizes="48px"
+                priority
+              />
             </div>
             <div className="flex flex-col">
               <span className="text-base sm:text-lg md:text-xl font-bold text-text-primary leading-tight">
@@ -41,7 +48,7 @@ export default function Header({ books }: HeaderProps) {
             </div>
           </Link>
 
-          {/* Buy on Amazon button - mobile only */}
+          {/* Buy on Amazon button - mobile only
           {featuredBook && (
             <button
               onClick={handleBuyClick}
@@ -50,10 +57,10 @@ export default function Header({ books }: HeaderProps) {
             >
               Buy on Amazon
             </button>
-          )}
+          )} */}
 
           {/* Navigation - desktop only */}
-          <nav className="hidden md:flex items-center gap-6">
+          {/* <nav className="hidden md:flex items-center gap-6">
             <a href="#books" className="text-text-primary hover:text-primary-1 transition-colors font-medium">
               Books
             </a>
@@ -66,7 +73,7 @@ export default function Header({ books }: HeaderProps) {
             <a href="#signup" className="text-text-primary hover:text-primary-1 transition-colors font-medium">
               Sign Up
             </a>
-          </nav>
+          </nav> */}
         </div>
       </div>
     </header>

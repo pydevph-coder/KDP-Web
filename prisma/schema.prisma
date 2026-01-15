@@ -11,16 +11,27 @@ datasource db {
 }
 
 model Book {
-  id          String   @id @default(cuid())
-  title       String
-  coverImage  String
-  description String
-  amazonLink  String
-  benefits    String[] // Array of benefit bullets
-  featured    Boolean  @default(false)
-  order       Int      @default(0) // For ordering books
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id                    String   @id @default(cuid())
+  title                 String
+  slug                  String?  @unique // SEO-friendly URL slug (optional, can use id if not set)
+  coverImage            String
+  description           String   // Short description for listings
+  introduction          String?  // "Meet [Book Name]" section - longer introduction
+  amazonLink            String
+  painPoints            String[] // "You're Not Alone" section - array of pain points
+  painPointsHeader      String?  // Custom header for pain points section (e.g., "You're Not Alone, Teen")
+  benefits              String[] // "How This Book Will Help You" - array of benefits
+  benefitsHeader        String?  // Custom header for benefits section (e.g., "How This Workbook Will Help You")
+  features              String[] // "What You'll Find Inside" - array of features/content
+  featuresHeader        String?  // Custom header for features section (e.g., "What You'll Discover Inside")
+  targetAudience        String[] // "This Book Is For You If..." - array of target audiences
+  targetAudienceHeader  String?  // Custom header for target audience section
+  faithMessage          String?  // "Faith That Supports" or "Rooted in Faith" section
+  faithMessageHeader    String?  // Custom header for faith message section
+  featured              Boolean  @default(false)
+  order                 Int      @default(0) // For ordering books
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
 
   clicks Click[]
 }

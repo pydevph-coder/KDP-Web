@@ -23,28 +23,28 @@ export default function Hero({ books }: HeroProps) {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-background-1 via-background-2 to-background-1 px-4 sm:px-6 py-12 sm:py-20">
+    <section className="relative flex items-center justify-center bg-gradient-to-br from-background-1 via-background-2 to-background-1 px-4 sm:px-6 py-12 sm:py-20">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center">
         {/* Book Cover */}
-        <div className="flex justify-center md:justify-start order-2 md:order-1">
+        {/* <div className="flex justify-center md:justify-start order-2 md:order-1">
           {featuredBook ? (
-            <div className="relative w-56 sm:w-64 md:w-80 h-auto transform hover:scale-105 transition-transform duration-300 shadow-2xl">
-              <Image
-                src={featuredBook.coverImage}
-                alt={featuredBook.title}
-                width={400}
-                height={600}
-                className="rounded-lg"
-                priority
-                sizes="(max-width: 640px) 224px, (max-width: 768px) 256px, 320px"
-              />
-            </div>
+            // <div className="relative w-56 sm:w-64 md:w-80 h-auto transform hover:scale-105 transition-transform duration-300 shadow-2xl">
+            //   <Image
+            //     src={featuredBook.coverImage}
+            //     alt={featuredBook.title}
+            //     width={400}
+            //     height={600}
+            //     className="rounded-lg"
+            //     priority
+            //     sizes="(max-width: 640px) 224px, (max-width: 768px) 256px, 320px"
+            //   />
+            // </div>
           ) : (
             <div className="w-56 sm:w-64 md:w-80 h-80 sm:h-96 bg-primary-1 rounded-lg flex items-center justify-center text-white text-lg sm:text-xl">
               Book Cover
             </div>
           )}
-        </div>
+        </div> */}
 
         {/* Content */}
         <div className="text-center md:text-left space-y-4 sm:space-y-6 order-1 md:order-2">
@@ -55,7 +55,7 @@ export default function Hero({ books }: HeroProps) {
             Faith-based books and guided journals designed to nurture your mental wellness and deepen your connection with God.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start pt-2 sm:pt-4">
+          {/* <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start pt-2 sm:pt-4">
             {featuredBook ? (
               <button
                 onClick={() => handleBuyClick(featuredBook.amazonLink, featuredBook.id)}
@@ -73,8 +73,8 @@ export default function Hero({ books }: HeroProps) {
               className="btn-secondary text-base sm:text-lg text-center w-full sm:w-auto"
             >
               View All Books
-            </a>
-          </div>
+            </a> */}
+          {/* </div> */}
         </div>
       </div>
 

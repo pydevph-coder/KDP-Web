@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { trackClick } from '@/lib/analytics';
 
 interface Book {
@@ -47,30 +48,32 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
           Discover Our Books
         </h2>
         
-        <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6 lg:gap-12">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 md:gap-6 lg:gap-12">
           {booksArray.map((book) => (
             <div
               key={book.id}
               className="bg-background-1 rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-4 md:p-6 lg:p-8 shadow-md sm:shadow-lg md:hover:shadow-xl lg:hover:shadow-2xl transition-all duration-300 transform md:hover:-translate-y-2 active:scale-95 flex flex-col"
             >
-              {/* Book Cover */}
-              <div className="flex justify-center mb-2 sm:mb-3 md:mb-4 lg:mb-6">
-                <div className="relative w-full max-w-[80px] sm:max-w-[100px] md:max-w-[140px] lg:max-w-[192px] aspect-[2/3] transform hover:scale-105 transition-transform duration-300">
+              {/* Book Cover - Clickable */}
+              <Link href={`/book/${book.id}`} className="flex justify-center mb-2 sm:mb-3 md:mb-4 lg:mb-6 group">
+                <div className="relative w-full max-w-[80px] sm:max-w-[100px] md:max-w-[140px] lg:max-w-[192px] aspect-[2/3] transform group-hover:scale-105 transition-transform duration-300 cursor-pointer">
                   <Image
                     src={book.coverImage}
                     alt={book.title}
                     width={200}
                     height={300}
-                    className="rounded-md sm:rounded-lg shadow-lg sm:shadow-xl object-cover"
+                    className="rounded-md sm:rounded-lg shadow-lg sm:shadow-xl object-cover group-hover:shadow-2xl transition-shadow duration-300"
                     sizes="(max-width: 640px) 80px, (max-width: 768px) 100px, (max-width: 1024px) 140px, 192px"
                   />
                 </div>
-              </div>
+              </Link>
 
-              {/* Book Title */}
-              <h3 className="text-[10px] sm:text-xs md:text-base lg:text-xl font-bold text-text-primary mb-2 sm:mb-3 md:mb-4 text-center line-clamp-2">
-                {book.title}
-              </h3>
+              {/* Book Title - Clickable */}
+              <Link href={`/book/${book.id}`}>
+                <h3 className="text-[10px] sm:text-xs md:text-base lg:text-xl font-bold text-text-primary mb-2 sm:mb-3 md:mb-4 text-center line-clamp-2 hover:text-primary-1 transition-colors duration-200 cursor-pointer">
+                  {book.title}
+                </h3>
+              
 
               {/* Benefits - show on all screens */}
               {book.benefits && book.benefits.length > 0 && (
@@ -84,6 +87,13 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
                 </ul>
               )}
 
+              
+
+              {/* Description - show on lg+ (desktop only) */}
+              <p className="hidden text-justify lg:block text-sm lg:text-base text-text-primary/70 mt-4 lg:mt-6 line-clamp-3">
+                {book.description}
+              </p>
+              </Link>
               {/* CTA Button - Below book cover and benefits, smaller */}
               <button
                 onClick={() => handleBuyClick(book.amazonLink, book.id)}
@@ -91,11 +101,6 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
               >
                 Buy on Amazon
               </button>
-
-              {/* Description - show on lg+ (desktop only) */}
-              <p className="hidden text-justify lg:block text-sm lg:text-base text-text-primary/70 mt-4 lg:mt-6 line-clamp-3">
-                {book.description}
-              </p>
             </div>
           ))}
         </div>
