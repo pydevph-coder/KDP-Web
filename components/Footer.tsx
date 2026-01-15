@@ -54,7 +54,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-white/20 pt-6 sm:pt-8 text-center text-white/60 text-sm sm:text-base">
-          <p>&copy; {currentYear} Your Author Name. All rights reserved.</p>
+          <p>&copy; {currentYear} Ruel Awayan. All rights reserved.</p>
         </div>
       </div>
     </footer>
