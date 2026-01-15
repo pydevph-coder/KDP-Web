@@ -1,14 +1,38 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import type { Book } from "@prisma/client";
+// import type { Book } from "@prisma/client";
 import BookForm from "./BookForm";
 import BookList from "./BookList";
 
+export interface FullBook {
+  id: string;
+  createdAt: string; // Dates from fetch will be strings
+  updatedAt: string;
+  slug: string | null;
+  title: string;
+  coverImage: string;
+  description: string;
+  introduction: string | null;
+  amazonLink: string;
+  painPoints: string[];
+  painPointsHeader?: string | null;
+  benefits: string[];
+  benefitsHeader?: string | null;
+  features: string[];
+  featuresHeader?: string | null;
+  targetAudience: string[];
+  targetAudienceHeader?: string | null;
+  faithMessage?: string | null;
+  faithMessageHeader?: string | null;
+  featured: boolean;
+  order: number;
+}
+
 export default function BooksManager() {
-  const [books, setBooks] = useState<Book[]>([]);
+  const [books, setBooks] = useState<FullBook[]>([]);
   const [loading, setLoading] = useState(true);
-  const [editingBook, setEditingBook] = useState<Book | null>(null);
+  const [editingBook, setEditingBook] = useState<FullBook | null>(null);
   const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
@@ -37,7 +61,7 @@ export default function BooksManager() {
     setShowForm(true);
   };
 
-  const handleEdit = (book: Book) => {
+  const handleEdit = (book: FullBook) => {
     setEditingBook(book);
     setShowForm(true);
   };
