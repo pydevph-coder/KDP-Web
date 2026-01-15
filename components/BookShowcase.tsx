@@ -41,42 +41,43 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
   }
 
   return (
-    <section id="books" className="py-20 px-4 bg-white">
+    <section id="books" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-white">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-bold text-center text-text-primary mb-16">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-text-primary mb-8 sm:mb-12 md:mb-16">
           Discover Our Books
         </h2>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-12">
           {booksArray.map((book) => (
             <div
               key={book.id}
-              className="bg-background-1 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+              className="bg-background-1 rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 active:scale-95"
             >
               {/* Book Cover */}
-              <div className="flex justify-center mb-6">
-                <div className="relative w-48 h-72 transform hover:scale-105 transition-transform duration-300">
+              <div className="flex justify-center mb-4 sm:mb-6">
+                <div className="relative w-40 sm:w-48 h-60 sm:h-72 transform hover:scale-105 transition-transform duration-300">
                   <Image
                     src={book.coverImage}
                     alt={book.title}
                     width={200}
                     height={300}
                     className="rounded-lg shadow-xl"
+                    sizes="(max-width: 640px) 160px, 192px"
                   />
                 </div>
               </div>
 
               {/* Book Info */}
-              <h3 className="text-2xl font-bold text-text-primary mb-4 text-center">
+              <h3 className="text-xl sm:text-2xl font-bold text-text-primary mb-3 sm:mb-4 text-center">
                 {book.title}
               </h3>
 
               {/* Benefits */}
               {book.benefits && book.benefits.length > 0 && (
-                <ul className="space-y-2 mb-6">
+                <ul className="space-y-2 mb-4 sm:mb-6">
                   {book.benefits.map((benefit, index) => (
-                    <li key={index} className="flex items-start">
-                      <span className="text-primary-1 mr-2">✓</span>
+                    <li key={index} className="flex items-start text-sm sm:text-base">
+                      <span className="text-primary-1 mr-2 flex-shrink-0 mt-0.5">✓</span>
                       <span className="text-text-primary/80">{benefit}</span>
                     </li>
                   ))}
@@ -84,14 +85,14 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
               )}
 
               {/* Description */}
-              <p className="text-text-primary/70 mb-6 line-clamp-3">
+              <p className="text-sm sm:text-base text-text-primary/70 mb-4 sm:mb-6 line-clamp-3">
                 {book.description}
               </p>
 
               {/* CTA Button */}
               <button
                 onClick={() => handleBuyClick(book.amazonLink, book.id)}
-                className="btn-primary w-full"
+                className="btn-primary w-full text-base sm:text-lg"
               >
                 Buy on Amazon
               </button>

@@ -25,7 +25,8 @@ export default function StickyCTA({ books }: StickyCTAProps) {
     <div className="sticky-cta md:hidden">
       <button
         onClick={handleClick}
-        className="btn-primary w-full text-lg"
+        className="btn-primary w-full text-base sm:text-lg font-semibold"
+        aria-label="Buy on Amazon"
       >
         Buy on Amazon
       </button>
