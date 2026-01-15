@@ -1,10 +1,9 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import BookForm from './BookForm';
-import BookList from './BookList';
+import { useState, useEffect } from "react";
 import type { Book } from "@prisma/client";
-
+import BookForm from "./BookForm";
+import BookList from "./BookList";
 
 export default function BooksManager() {
   const [books, setBooks] = useState<Book[]>([]);
