@@ -4,30 +4,39 @@ import { useState, useEffect } from "react";
 // import type { Book } from "@prisma/client";
 import BookForm from "./BookForm";
 import BookList from "./BookList";
+import type { Book } from "@prisma/client";
 
-export interface FullBook {
-  id: string;
-  createdAt: Date;
-  updatedAt: Date;
-  slug: string | null;
-  title: string;
-  coverImage: string;
-  description: string;
-  introduction: string | null;
-  amazonLink: string;
-  painPoints: string[];
+export interface FullBook extends Book {
   painPointsHeader: string | null;
-  benefits: string[];
   benefitsHeader: string | null;
-  features: string[];
   featuresHeader: string | null;
-  targetAudience: string[];
   targetAudienceHeader: string | null;
   faithMessage: string | null;
   faithMessageHeader: string | null;
-  featured: boolean;
-  order: number;
 }
+// export interface FullBook {
+//   id: string;
+//   createdAt: Date;
+//   updatedAt: Date;
+//   slug: string | null;
+//   title: string;
+//   coverImage: string;
+//   description: string;
+//   introduction: string | null;
+//   amazonLink: string;
+//   painPoints: string[];
+//   painPointsHeader: string | null;
+//   benefits: string[];
+//   benefitsHeader: string | null;
+//   features: string[];
+//   featuresHeader: string | null;
+//   targetAudience: string[];
+//   targetAudienceHeader: string | null;
+//   faithMessage: string | null;
+//   faithMessageHeader: string | null;
+//   featured: boolean;
+//   order: number;
+// }
 
 export default function BooksManager() {
   const [books, setBooks] = useState<FullBook[]>([]);
