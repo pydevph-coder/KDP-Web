@@ -32,18 +32,18 @@ export default function WhyTheseBooks() {
           Each book is carefully crafted to support your journey of faith and wellness.
         </p>
 
-        <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+        <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6 lg:gap-8">
           {features.map((feature, index) => (
             <div
               key={index}
-              className="flex gap-4 sm:gap-6 p-6 sm:p-8 bg-background-1 rounded-2xl hover:shadow-xl transition-all duration-300 active:scale-95"
+              className="flex flex-col sm:flex-row gap-2 sm:gap-4 md:gap-6 p-3 sm:p-4 md:p-6 lg:p-8 bg-background-1 rounded-lg sm:rounded-xl md:rounded-2xl md:hover:shadow-xl transition-all duration-300 active:scale-95 text-center sm:text-left"
             >
-              <div className="text-4xl sm:text-5xl flex-shrink-0">{feature.icon}</div>
-              <div>
-                <h3 className="text-xl sm:text-2xl font-bold text-text-primary mb-2 sm:mb-3">
+              <div className="text-3xl sm:text-4xl md:text-5xl flex-shrink-0 mx-auto sm:mx-0">{feature.icon}</div>
+              <div className="flex-1">
+                <h3 className="text-xs sm:text-sm md:text-lg lg:text-xl xl:text-2xl font-bold text-text-primary mb-1 sm:mb-2 md:mb-3">
                   {feature.title}
                 </h3>
-                <p className="text-sm sm:text-base text-text-primary/70 leading-relaxed">
+                <p className="text-[10px] sm:text-xs md:text-sm lg:text-base text-text-primary/70 leading-relaxed">
                   {feature.description}
                 </p>
               </div>

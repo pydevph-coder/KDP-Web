@@ -1,3 +1,4 @@
+import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import BookShowcase from '@/components/BookShowcase';
 import WhoItsFor from '@/components/WhoItsFor';
@@ -37,6 +38,7 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen">
+      <Header />
       <Hero books={books} />
       <BookShowcase books={books} />
       <WhoItsFor />

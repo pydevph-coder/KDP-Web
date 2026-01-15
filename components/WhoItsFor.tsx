@@ -32,17 +32,17 @@ export default function WhoItsFor() {
           These books are designed for anyone seeking to grow in faith and find peace in their daily lives.
         </p>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+        <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6 lg:gap-8">
           {targetAudiences.map((audience, index) => (
             <div
               key={index}
-              className="bg-white rounded-2xl p-6 sm:p-8 text-center shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 active:scale-95"
+              className="bg-white rounded-lg sm:rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8 text-center shadow-md sm:shadow-lg md:hover:shadow-xl lg:hover:shadow-2xl transition-all duration-300 transform md:hover:-translate-y-2 active:scale-95"
             >
-              <div className="text-5xl sm:text-6xl mb-3 sm:mb-4">{audience.icon}</div>
-              <h3 className="text-xl sm:text-2xl font-bold text-text-primary mb-2 sm:mb-3">
+              <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-2 sm:mb-3 md:mb-4">{audience.icon}</div>
+              <h3 className="text-xs sm:text-sm md:text-lg lg:text-xl xl:text-2xl font-bold text-text-primary mb-1 sm:mb-2 md:mb-3">
                 {audience.title}
               </h3>
-              <p className="text-sm sm:text-base text-text-primary/70">
+              <p className="text-[10px] sm:text-xs md:text-sm lg:text-base text-text-primary/70">
                 {audience.description}
               </p>
             </div>
