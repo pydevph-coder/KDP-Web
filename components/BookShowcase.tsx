@@ -93,7 +93,7 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
               </button>
 
               {/* Description - show on lg+ (desktop only) */}
-              <p className="hidden lg:block text-sm lg:text-base text-text-primary/70 mt-4 lg:mt-6 line-clamp-3">
+              <p className="hidden text-justify lg:block text-sm lg:text-base text-text-primary/70 mt-4 lg:mt-6 line-clamp-3">
                 {book.description}
               </p>
             </div>
