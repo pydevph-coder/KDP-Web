@@ -53,16 +53,8 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
               key={book.id}
               className="bg-background-1 rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-4 md:p-6 lg:p-8 shadow-md sm:shadow-lg md:hover:shadow-xl lg:hover:shadow-2xl transition-all duration-300 transform md:hover:-translate-y-2 active:scale-95 flex flex-col"
             >
-              {/* CTA Button - At the top */}
-              <button
-                onClick={() => handleBuyClick(book.amazonLink, book.id)}
-                className="btn-primary w-full text-[10px] sm:text-xs md:text-sm lg:text-base sm:text-lg py-1.5 sm:py-2 md:py-3 lg:py-4 mb-2 sm:mb-3 md:mb-4 lg:mb-6 order-1"
-              >
-                Buy on Amazon
-              </button>
-
               {/* Book Cover */}
-              <div className="flex justify-center mb-2 sm:mb-3 md:mb-4 lg:mb-6 order-2">
+              <div className="flex justify-center mb-2 sm:mb-3 md:mb-4 lg:mb-6">
                 <div className="relative w-full max-w-[80px] sm:max-w-[100px] md:max-w-[140px] lg:max-w-[192px] aspect-[2/3] transform hover:scale-105 transition-transform duration-300">
                   <Image
                     src={book.coverImage}
@@ -76,24 +68,32 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
               </div>
 
               {/* Book Title */}
-              <h3 className="text-[10px] sm:text-xs md:text-base lg:text-xl font-bold text-text-primary mb-1 sm:mb-2 md:mb-3 lg:mb-4 text-center line-clamp-2 order-3">
+              <h3 className="text-[10px] sm:text-xs md:text-base lg:text-xl font-bold text-text-primary mb-2 sm:mb-3 md:mb-4 text-center line-clamp-2">
                 {book.title}
               </h3>
 
-              {/* Benefits - show on md+ (tablet and desktop) */}
+              {/* Benefits - show on all screens */}
               {book.benefits && book.benefits.length > 0 && (
-                <ul className="hidden md:block space-y-1 md:space-y-2 mb-2 md:mb-4 lg:mb-6 order-4">
+                <ul className="space-y-1 sm:space-y-1.5 md:space-y-2 mb-2 sm:mb-3 md:mb-4 lg:mb-6 flex-1">
                   {book.benefits.map((benefit, index) => (
-                    <li key={index} className="flex items-start text-xs md:text-sm lg:text-base">
-                      <span className="text-primary-1 mr-1 md:mr-2 flex-shrink-0 mt-0.5">✓</span>
-                      <span className="text-text-primary/80">{benefit}</span>
+                    <li key={index} className="flex items-start text-[9px] sm:text-[10px] md:text-xs lg:text-sm xl:text-base">
+                      <span className="text-primary-1 mr-1 sm:mr-1.5 md:mr-2 flex-shrink-0 mt-0.5">✓</span>
+                      <span className="text-text-primary/80 leading-tight">{benefit}</span>
                     </li>
                   ))}
                 </ul>
               )}
 
+              {/* CTA Button - Below book cover and benefits, smaller */}
+              <button
+                onClick={() => handleBuyClick(book.amazonLink, book.id)}
+                className="bg-primary-1 hover:bg-primary-2 active:bg-primary-2 text-white font-semibold text-[9px] sm:text-[10px] md:text-xs lg:text-sm py-1.5 sm:py-2 md:py-2.5 lg:py-3 px-3 sm:px-4 md:px-5 lg:px-6 rounded-full transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 w-full mt-auto"
+              >
+                Buy on Amazon
+              </button>
+
               {/* Description - show on lg+ (desktop only) */}
-              <p className="hidden lg:block text-sm lg:text-base text-text-primary/70 mb-4 lg:mb-6 line-clamp-3 order-5">
+              <p className="hidden lg:block text-sm lg:text-base text-text-primary/70 mt-4 lg:mt-6 line-clamp-3">
                 {book.description}
               </p>
             </div>

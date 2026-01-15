@@ -7,7 +7,6 @@ import Testimonials from '@/components/Testimonials';
 import AboutAuthor from '@/components/AboutAuthor';
 import EmailSignup from '@/components/EmailSignup';
 import Footer from '@/components/Footer';
-import StickyCTA from '@/components/StickyCTA';
 import { prisma } from '@/lib/prisma';
 import type { Author, Book, Testimonial } from '@prisma/client';
 
@@ -38,7 +37,7 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen">
-      <Header />
+      <Header books={books} />
       <Hero books={books} />
       <BookShowcase books={books} />
       <WhoItsFor />
@@ -47,7 +46,6 @@ export default async function Home() {
       {author && <AboutAuthor author={author} />}
       <EmailSignup />
       <Footer />
-      <StickyCTA books={books} />
     </main>
   );
 }

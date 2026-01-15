@@ -32,18 +32,18 @@ export default function WhyTheseBooks() {
           Each book is carefully crafted to support your journey of faith and wellness.
         </p>
 
-        <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6 lg:gap-8">
+        <div className="grid grid-cols-4 gap-1.5 sm:gap-2 md:gap-3 lg:gap-4">
           {features.map((feature, index) => (
             <div
               key={index}
-              className="flex flex-col sm:flex-row gap-2 sm:gap-4 md:gap-6 p-3 sm:p-4 md:p-6 lg:p-8 bg-background-1 rounded-lg sm:rounded-xl md:rounded-2xl md:hover:shadow-xl transition-all duration-300 active:scale-95 text-center sm:text-left"
+              className="flex flex-col gap-1.5 sm:gap-2 p-2 sm:p-3 md:p-4 lg:p-5 bg-background-1 rounded-md sm:rounded-lg md:rounded-xl md:hover:shadow-lg transition-all duration-300 active:scale-95 text-center"
             >
-              <div className="text-3xl sm:text-4xl md:text-5xl flex-shrink-0 mx-auto sm:mx-0">{feature.icon}</div>
+              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl flex-shrink-0 mx-auto">{feature.icon}</div>
               <div className="flex-1">
-                <h3 className="text-xs sm:text-sm md:text-lg lg:text-xl xl:text-2xl font-bold text-text-primary mb-1 sm:mb-2 md:mb-3">
+                <h3 className="text-[10px] sm:text-xs md:text-sm lg:text-base font-bold text-text-primary mb-1 sm:mb-1.5 md:mb-2">
                   {feature.title}
                 </h3>
-                <p className="text-[10px] sm:text-xs md:text-sm lg:text-base text-text-primary/70 leading-relaxed">
+                <p className="text-[9px] sm:text-[10px] md:text-xs lg:text-sm text-text-primary/70 leading-tight">
                   {feature.description}
                 </p>
               </div>

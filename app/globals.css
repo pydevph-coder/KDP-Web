@@ -77,26 +77,6 @@ body {
   }
 }
 
-/* Sticky CTA for mobile - with safe area support */
-@media (max-width: 768px) {
-  .sticky-cta {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 50;
-    padding: 1rem;
-    padding-bottom: max(1rem, env(safe-area-inset-bottom));
-    background: white;
-    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(10px);
-  }
-  
-  /* Add padding to body when sticky CTA is visible */
-  body:has(.sticky-cta) {
-    padding-bottom: 100px;
-  }
-}
 
 /* Improve touch targets for links and interactive elements */
 a, button {

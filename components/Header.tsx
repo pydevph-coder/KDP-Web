@@ -1,6 +1,27 @@
-import Link from 'next/link';
+'use client';
 
-export default function Header() {
+import Link from 'next/link';
+import { trackClick } from '@/lib/analytics';
+
+interface Book {
+  id: string;
+  amazonLink: string;
+}
+
+interface HeaderProps {
+  books: Book[];
+}
+
+export default function Header({ books }: HeaderProps) {
+  const featuredBook = books[0] || null;
+
+  const handleBuyClick = () => {
+    if (featuredBook) {
+      trackClick(featuredBook.amazonLink, 'header', featuredBook.id);
+      window.open(featuredBook.amazonLink, '_blank');
+    }
+  };
+
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-background-2 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
@@ -20,7 +41,18 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Navigation - hidden on mobile, shown on desktop */}
+          {/* Buy on Amazon button - mobile only */}
+          {featuredBook && (
+            <button
+              onClick={handleBuyClick}
+              className="md:hidden btn-primary text-xs sm:text-sm py-2 px-4 sm:px-6"
+              aria-label="Buy on Amazon"
+            >
+              Buy on Amazon
+            </button>
+          )}
+
+          {/* Navigation - desktop only */}
           <nav className="hidden md:flex items-center gap-6">
             <a href="#books" className="text-text-primary hover:text-primary-1 transition-colors font-medium">
               Books
@@ -35,16 +67,6 @@ export default function Header() {
               Sign Up
             </a>
           </nav>
-
-          {/* Mobile menu button */}
-          <button
-            className="md:hidden p-2 text-text-primary hover:text-primary-1 transition-colors"
-            aria-label="Menu"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
         </div>
       </div>
     </header>
