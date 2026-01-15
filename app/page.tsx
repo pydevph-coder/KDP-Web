@@ -1,8 +1,8 @@
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import BookShowcase from '@/components/BookShowcase';
-import WhoItsFor from '@/components/WhoItsFor';
-import WhyTheseBooks from '@/components/WhyTheseBooks';
+// import WhoItsFor from '@/components/WhoItsFor';
+// import WhyTheseBooks from '@/components/WhyTheseBooks';
 import Testimonials from '@/components/Testimonials';
 import AboutAuthor from '@/components/AboutAuthor';
 import EmailSignup from '@/components/EmailSignup';
@@ -40,8 +40,8 @@ export default async function Home() {
       <Header books={books} />
       <Hero books={books} />
       <BookShowcase books={books} />
-      <WhoItsFor />
-      <WhyTheseBooks />
+      {/* <WhoItsFor />
+      <WhyTheseBooks /> */}
       {testimonials.length > 0 && <Testimonials testimonials={testimonials} />}
       {author && <AboutAuthor author={author} />}
       <EmailSignup />
