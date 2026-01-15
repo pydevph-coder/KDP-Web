@@ -13,7 +13,18 @@ export const dynamic = 'force-dynamic';
 interface BookDetailsPageProps {
   params: { id: string };
 }
-
+interface Testimonial {
+    id: string;
+    name: string;
+    message: string;
+    date: string;
+  }
+interface Author {
+  id: string;
+  name: string;
+  bio: string;
+  image: string;
+}
 async function getBook(id: string) {
   try {
     const book = await prisma.book.findUnique({
@@ -80,8 +91,8 @@ export default async function BookDetailsPage({ params }: BookDetailsPageProps) 
   });
 
   // Fetch testimonials and author data
-  let testimonials = [];
-  let author = null;
+  let testimonials: Testimonial[] = [];
+  let author: Author | null = null;
 
   try {
     testimonials = await prisma.testimonial.findMany({
