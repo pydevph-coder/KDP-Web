@@ -7,7 +7,7 @@ import BookList from "./BookList";
 
 export interface FullBook {
   id: string;
-  createdAt: Date; // Dates from fetch will be strings
+  createdAt: Date;
   updatedAt: Date;
   slug: string | null;
   title: string;
@@ -16,15 +16,15 @@ export interface FullBook {
   introduction: string | null;
   amazonLink: string;
   painPoints: string[];
-  painPointsHeader?: string | null;
+  painPointsHeader: string | null;
   benefits: string[];
-  benefitsHeader?: string | null;
+  benefitsHeader: string | null;
   features: string[];
-  featuresHeader?: string | null;
+  featuresHeader: string | null;
   targetAudience: string[];
-  targetAudienceHeader?: string | null;
-  faithMessage?: string | null;
-  faithMessageHeader?: string | null;
+  targetAudienceHeader: string | null;
+  faithMessage: string | null;
+  faithMessageHeader: string | null;
   featured: boolean;
   order: number;
 }
@@ -47,10 +47,26 @@ export default function BooksManager() {
       }
       const data = await response.json();
       // Ensure data is always an array
-      setBooks(Array.isArray(data) ? data : []);
-    } catch (error) {
-      console.error('Failed to fetch books:', error);
-      setBooks([]); // Set empty array on error
+      const booksWithDates: FullBook[] = (Array.isArray(data) ? data : []).map((b: any) => ({
+        ...b,
+        createdAt: new Date(b.createdAt),
+        updatedAt: new Date(b.updatedAt),
+        painPoints: b.painPoints || [],
+        benefits: b.benefits || [],
+        features: b.features || [],
+        targetAudience: b.targetAudience || [],
+        painPointsHeader: b.painPointsHeader ?? null,
+        benefitsHeader: b.benefitsHeader ?? null,
+        featuresHeader: b.featuresHeader ?? null,
+        targetAudienceHeader: b.targetAudienceHeader ?? null,
+        faithMessage: b.faithMessage ?? null,
+        faithMessageHeader: b.faithMessageHeader ?? null,
+      }));
+  
+      setBooks(booksWithDates);
+    } catch (err) {
+      console.error(err);
+      setBooks([]);
     } finally {
       setLoading(false);
     }
