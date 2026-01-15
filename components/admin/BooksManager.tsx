@@ -3,17 +3,8 @@
 import { useState, useEffect } from 'react';
 import BookForm from './BookForm';
 import BookList from './BookList';
-
-interface Book {
-  id: string;
-  title: string;
-  coverImage: string;
-  description: string;
-  amazonLink: string;
-  benefits: string[];
-  featured: boolean;
-  order: number;
-}
+import type { Book } from "@prisma/client";
+const [editingBook, setEditingBook] = useState<Book | null>(null);
 
 export default function BooksManager() {
   const [books, setBooks] = useState<Book[]>([]);

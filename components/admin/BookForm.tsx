@@ -2,33 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-
-interface Book {
-  id: string;
-  title: string;
-  coverImage: string;
-  description: string;
-  introduction?: string | null;
-  amazonLink: string;
-  painPoints: string[];
-  painPointsHeader?: string | null;
-  benefits: string[];
-  benefitsHeader?: string | null;
-  features: string[];
-  featuresHeader?: string | null;
-  targetAudience: string[];
-  targetAudienceHeader?: string | null;
-  faithMessage?: string | null;
-  faithMessageHeader?: string | null;
-  featured: boolean;
-  order: number;
-}
+import type { Book } from "@prisma/client";
 
 interface BookFormProps {
   book: Book | null;
   onClose: () => void;
   onSave: () => void;
 }
+
 
 // Helper function to parse textarea content (newlines) into array
 const parseTextareaToArray = (text: string): string[] => {
