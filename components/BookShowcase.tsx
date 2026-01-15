@@ -22,7 +22,10 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
     window.open(link, '_blank');
   };
 
-  if (books.length === 0) {
+  // Ensure books is always an array
+  const booksArray = Array.isArray(books) ? books : [];
+
+  if (booksArray.length === 0) {
     return (
       <section id="books" className="py-20 px-4 bg-white">
         <div className="max-w-7xl mx-auto text-center">
@@ -45,7 +48,7 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
         </h2>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
-          {books.map((book) => (
+          {booksArray.map((book) => (
             <div
               key={book.id}
               className="bg-background-1 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"

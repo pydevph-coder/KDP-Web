@@ -20,7 +20,10 @@ interface BookListProps {
 }
 
 export default function BookList({ books, onEdit, onDelete }: BookListProps) {
-  if (books.length === 0) {
+  // Ensure books is always an array
+  const booksArray = Array.isArray(books) ? books : [];
+
+  if (booksArray.length === 0) {
     return (
       <div className="bg-white rounded-2xl p-12 text-center">
         <p className="text-text-primary/70">No books yet. Add your first book!</p>
@@ -30,7 +33,7 @@ export default function BookList({ books, onEdit, onDelete }: BookListProps) {
 
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {books.map((book) => (
+      {booksArray.map((book) => (
         <div
           key={book.id}
           className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all"

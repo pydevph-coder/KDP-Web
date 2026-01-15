@@ -28,10 +28,15 @@ export default function BooksManager() {
   const fetchBooks = async () => {
     try {
       const response = await fetch('/api/admin/books');
+      if (!response.ok) {
+        throw new Error('Failed to fetch books');
+      }
       const data = await response.json();
-      setBooks(data);
+      // Ensure data is always an array
+      setBooks(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error('Failed to fetch books:', error);
+      setBooks([]); // Set empty array on error
     } finally {
       setLoading(false);
     }

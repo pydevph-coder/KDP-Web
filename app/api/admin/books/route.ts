@@ -17,10 +17,10 @@ export async function GET() {
     });
     return NextResponse.json(books);
   } catch (error) {
-    return NextResponse.json(
-      { error: 'Failed to fetch books' },
-      { status: 500 }
-    );
+    console.error('Failed to fetch books:', error);
+    // Return empty array instead of error object to prevent frontend crashes
+    // If tables don't exist, return empty array so UI can render
+    return NextResponse.json([]);
   }
 }
 
