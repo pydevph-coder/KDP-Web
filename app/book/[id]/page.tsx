@@ -23,12 +23,12 @@ interface Testimonial {
   }
 interface Author {
   id: string;
-  name: string;
-  bio: string;
-  photo: string;
-  credentials: string;
-  createdAt: Date;
-  updatedAt: Date;
+  name?: string | null;
+  bio?: string | null;
+  photo?: string | null ;
+  credentials?: string | null;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 async function getBook(id: string) {
   try {
