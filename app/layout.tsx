@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.jpg", // You'll need to add this
+        url: "https://m.media-amazon.com/images/I/81bsw6fnUiL._AC_UY327_FMwebp_QL65_.jpg", // You'll need to add this
         width: 1200,
         height: 630,
         alt: "Faith-Based Books & Guided Journals",
