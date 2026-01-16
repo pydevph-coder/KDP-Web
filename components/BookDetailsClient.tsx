@@ -51,11 +51,11 @@ export default function BookDetailsClient({ book }: BookDetailsClientProps) {
       {/* Main Content */}
       <section className="py-8 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto space-y-12 sm:space-y-16 md:space-y-20">
-          {/* Hero Section with Book Cover */}
-          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-start">
+         {/* Hero Section with Book Cover */}
+          <div className="grid grid-cols-2 gap-2 sm:gap-1 md:gap-8 lg:gap-16 items-start">
             {/* Book Cover - Left Side */}
-            <div className="flex justify-center lg:justify-start order-2 lg:order-1">
-              <div className="relative w-full max-w-[280px] sm:max-w-[320px] md:max-w-[400px] lg:max-w-[480px] aspect-[2/3] transform hover:scale-[1.02] transition-transform duration-300 shadow-2xl">
+            <div className="flex justify-start">
+              <div className="relative w-full max-w-[120px] sm:max-w-[160px] md:max-w-[240px] lg:max-w-[480px] aspect-[2/3] transform hover:scale-[1.02] transition-transform duration-300 shadow-2xl">
                 <Image
                   src={book.coverImage}
                   alt={book.title}
@@ -63,7 +63,7 @@ export default function BookDetailsClient({ book }: BookDetailsClientProps) {
                   height={720}
                   className="rounded-xl sm:rounded-2xl shadow-2xl object-cover"
                   priority
-                  sizes="(max-width: 640px) 280px, (max-width: 768px) 320px, (max-width: 1024px) 400px, 480px"
+                  sizes="(max-width: 640px) 120px, (max-width: 768px) 160px, (max-width: 1024px) 240px, 480px"
                 />
                 {/* Decorative gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-primary-1/10 to-transparent rounded-xl sm:rounded-2xl pointer-events-none" />
@@ -71,14 +71,14 @@ export default function BookDetailsClient({ book }: BookDetailsClientProps) {
             </div>
 
             {/* Title and Quick Info - Right Side */}
-            <div className="order-1 lg:order-2 space-y-6">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary leading-tight">
+            <div className="flex flex-col justify-start space-y-1 sm:space-y-2 md:space-y-4">
+              <h1 className="text-lg sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-text-primary leading-tight">
                 {book.title}
               </h1>
               
               {/* Quick Description */}
               {book.description && (
-                <p className="text-base sm:text-lg md:text-xl text-text-primary/80 leading-relaxed">
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl text-text-primary/80 leading-relaxed text-justify mt-0">
                   {book.description}
                 </p>
               )}
@@ -86,15 +86,17 @@ export default function BookDetailsClient({ book }: BookDetailsClientProps) {
               {/* Primary CTA Button */}
               <button
                 onClick={() => handleBuyClick(book.amazonLink, book.id)}
-                className="group w-full bg-primary-1 hover:bg-primary-2 active:bg-primary-2 text-white font-bold text-lg sm:text-xl md:text-2xl py-4 sm:py-5 md:py-6 px-8 sm:px-10 rounded-full transition-all duration-300 shadow-lg hover:shadow-2xl active:scale-95 flex items-center justify-center gap-3 sm:gap-4"
+                className="group w-full md:w-auto bg-primary-1 hover:bg-primary-2 active:bg-primary-2 text-white font-bold text-xs sm:text-sm md:text-lg lg:text-xl py-1.5 sm:py-2 md:py-3 lg:py-4 px-3 sm:px-4 md:px-6 lg:px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-2xl active:scale-95 flex items-center justify-center gap-2 sm:gap-3"
               >
-                <svg className="w-5 h-5 sm:w-6 sm:h-6 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
                 <span>Get Your Copy Today</span>
               </button>
             </div>
           </div>
+
+
 
           {/* Section 1: You're Not Alone */}
           {book.painPoints && book.painPoints.length > 0 && (

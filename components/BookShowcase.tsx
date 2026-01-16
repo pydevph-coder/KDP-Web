@@ -73,7 +73,11 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
                 <h3 className="text-[10px] sm:text-xs md:text-base lg:text-xl font-bold text-text-primary mb-2 sm:mb-3 md:mb-4 text-center line-clamp-2 hover:text-primary-1 transition-colors duration-200 cursor-pointer">
                   {book.title}
                 </h3>
-              
+              {/* Description - show on lg+ (desktop only) */}
+              <p className="bg-background-2 hidden lg:block text-justify text-sm lg:text-base text-text-primary/70 mt-4 lg:mt-6 line-clamp-3 px-4 py-3 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+                {book.description}
+              </p>
+
 
               {/* Benefits - show on all screens */}
               {book.benefits && book.benefits.length > 0 && (
@@ -89,10 +93,7 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
 
               
 
-              {/* Description - show on lg+ (desktop only) */}
-              <p className="hidden text-justify lg:block text-sm lg:text-base text-text-primary/70 mt-4 lg:mt-6 line-clamp-3">
-                {book.description}
-              </p>
+              
               </Link>
               {/* CTA Button - Below book cover and benefits, smaller */}
               <button
