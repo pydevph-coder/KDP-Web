@@ -24,14 +24,18 @@ interface BookShowcaseProps {
 
 export default function BookShowcase({ books }: BookShowcaseProps) {
   const pathname = usePathname();
-  const siteConfig = await getSiteConfig();
+  const [siteConfig, setSiteConfig] = useState<SiteConfig | undefined>({
+    pagination: 10,
+  });
   // Rename state to avoid shadowing the prop
   const [pagedBooks, setPagedBooks] = useState<Book[]>([]);
   const [totalBooks, setTotalBooks] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
-  const booksPerPage = 1;
-
+  const booksPerPage = siteConfig.pagination;
+   useEffect(() => {
+    fetchSiteConfig();
+  }, []);
   // Example: paginate books from props
   useEffect(() => {
     const start = (currentPage - 1) * booksPerPage;
@@ -49,6 +53,11 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
     const data = await res.json();
     setPagedBooks(data.books); // ✅ update state, not prop
     setTotalBooks(data.total);
+  };
+  const fetchSiteConfig = async () => {
+    const res = await getSiteConfig();
+    setSiteConfig(res);
+    // setBooksPerPage(res.pagination);
   };
 
   useEffect(() => {

@@ -12,6 +12,7 @@ export async function getSiteConfig() {
       metaImageUrl: null,
       createdAt: new Date(),
       updatedAt: new Date(),
+      pagination: 10,
     };
   }
   
