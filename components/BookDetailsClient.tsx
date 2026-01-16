@@ -51,8 +51,8 @@ export default function BookDetailsClient({ book }: BookDetailsClientProps) {
       {/* Main Content */}
       <section className="py-8 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto space-y-12 sm:space-y-16 md:space-y-20">
-         {/* Hero Section with Book Cover */}
-          <div className="grid grid-cols-2 gap-2 sm:gap-4 md:gap-8 lg:gap-16 items-start">
+          {/* Hero Section with Book Cover */}
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-8 lg:gap-16 items-start">
             {/* Book Cover - Left Side */}
             <div className="flex justify-start">
               <div className="relative w-full max-w-[120px] sm:max-w-[160px] md:max-w-[240px] lg:max-w-[480px] aspect-[2/3] transform hover:scale-[1.02] transition-transform duration-300 shadow-2xl">
@@ -70,34 +70,31 @@ export default function BookDetailsClient({ book }: BookDetailsClientProps) {
               </div>
             </div>
 
-            {/* Title, Description, and Button - Right Side */}
-            <div className="flex flex-col justify-between space-y-2 sm:space-y-3 md:space-y-4 h-full">
-              <div>
-                <h1 className="text-lg sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-text-primary leading-tight">
-                  {book.title}
-                </h1>
-                
-                {/* Quick Description */}
-                {book.description && (
-                  <p className="text-sm sm:text-base md:text-lg lg:text-xl text-text-primary/80 leading-relaxed text-justify mt-2">
-                    {book.description}
-                  </p>
-                )}
-              </div>
+            {/* Title and Quick Info - Right Side */}
+            <div className="space-y-3 sm:space-y-4 md:space-y-6">
+              <h1 className="text-lg sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-text-primary leading-tight">
+                {book.title}
+              </h1>
+              
+              {/* Quick Description */}
+              {book.description && (
+                <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl text-text-primary/80 leading-relaxed">
+                  {book.description}
+                </p>
+              )}
 
               {/* Primary CTA Button */}
               <button
                 onClick={() => handleBuyClick(book.amazonLink, book.id)}
-                className="group w-full md:w-auto mt-4 bg-primary-1 hover:bg-primary-2 active:bg-primary-2 text-white font-bold text-xs sm:text-sm md:text-lg lg:text-xl py-1.5 sm:py-2 md:py-3 lg:py-4 px-3 sm:px-4 md:px-6 lg:px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-2xl active:scale-95 flex items-center justify-center gap-2 sm:gap-3"
+                className="group w-full bg-primary-1 hover:bg-primary-2 active:bg-primary-2 text-white font-bold text-xs sm:text-sm md:text-lg lg:text-xl xl:text-2xl py-2 sm:py-3 md:py-4 lg:py-5 xl:py-6 px-4 sm:px-6 md:px-8 lg:px-10 rounded-full transition-all duration-300 shadow-lg hover:shadow-2xl active:scale-95 flex items-center justify-center gap-2 sm:gap-3 md:gap-4"
               >
-                <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
                 <span>Get Your Copy Today</span>
               </button>
             </div>
           </div>
-
 
           {/* Section 1: You're Not Alone */}
           {book.painPoints && book.painPoints.length > 0 && (

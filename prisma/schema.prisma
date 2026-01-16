@@ -50,19 +50,11 @@ model Author {
   id          String   @id @default(cuid())
   name        String
   bio         String
-  photo       String?   // Optional photo URL
-  credentials String?   // e.g., "Licensed Guidance Counselor"
-  email       String?   // Author's email
-  amazon      String?   // Link to Amazon page
-  twitter     String?   // Optional social links
-  facebook    String?
-  instagram   String?
-  youtube     String?
-  linkedin    String?
+  photo       String? // Optional photo URL
+  credentials String? // e.g., "Licensed Guidance Counselor"
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
-
 
 model EmailSubscriber {
   id        String   @id @default(cuid())
@@ -81,23 +73,4 @@ model Click {
 
   @@index([bookId])
   @@index([createdAt])
-}
-
-model SiteConfig {
-  id                   String   @id @default(cuid())
-  siteTitle            String
-  siteDescription      String?
-  siteUrl              String
-  profileUrl           String?    // e.g., Twitter, LinkedIn
-  metaImageUrl         String?    // default OG image
-  faviconUrl           String?
-  logoUrl              String?
-  paginationLimit      Int        @default(10)
-  defaultLanguage      String?    @default("en")
-  themeColor           String?    // hex code, e.g., #ffffff
-
-  createdAt            DateTime  @default(now())
-  updatedAt            DateTime  @updatedAt
-
-  @@unique([siteUrl])   // only one config per site URL
 }

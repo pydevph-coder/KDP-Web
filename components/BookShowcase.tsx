@@ -1,10 +1,9 @@
 'use client';
 
 import Image from 'next/image';
-// import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { trackClick } from '@/lib/analytics';
-import { usePathname } from "next/navigation";
+
 interface Book {
   id: string;
   title: string;
@@ -18,78 +17,16 @@ interface BookShowcaseProps {
   books: Book[];
 }
 
-
-
-export default function BookShowcase() {
-  const pathname = usePathname();
-  const [books, setBooks] = useState<Book[]>([]);
-  const [totalBooks, setTotalBooks] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [searchQuery, setSearchQuery] = useState("");
-  const booksPerPage = 1;
-  // Ensure books is always an array
-  const booksArray = Array.isArray(books) ? books : [];
-  
-  const fetchBooks = async () => {
-    const res = await fetch(
-      `/api/books?search=${encodeURIComponent(searchQuery)}&page=${currentPage}&limit=${booksPerPage}`
-    );
-    const data = await res.json();
-    console.log(data);
-    setBooks(data.books);
-    setTotalBooks(data.total);
-  };
-
-  useEffect(() => {
-    fetchBooks();
-  }, [currentPage, searchQuery]);
-
-  const totalPages = Math.ceil(totalBooks / booksPerPage);
-
-  function getPaginationPages(currentPage: number, totalPages: number, maxButtons = 5) {
-    const pages: (number | string)[] = [];
-    if (totalPages <= maxButtons) {
-      for (let i = 1; i <= totalPages; i++) pages.push(i);
-    } else {
-      const left = Math.max(2, currentPage - 1);
-      const right = Math.min(totalPages - 1, currentPage + 1);
-  
-      pages.push(1);
-      if (left > 2) pages.push("...");
-      for (let i = left; i <= right; i++) pages.push(i);
-      if (right < totalPages - 1) pages.push("...");
-      pages.push(totalPages);
-    }
-    return pages;
-  }
-  
-  
-  useEffect(() => {
-    setLoadingBookId(null); // reset loading when route changes
-  }, [pathname]);
-  const [loadingBookId, setLoadingBookId] = useState<string | null>(null);
-
+export default function BookShowcase({ books }: BookShowcaseProps) {
   const handleBuyClick = (link: string, bookId: string) => {
     trackClick(link, 'showcase', bookId);
     window.open(link, '_blank');
   };
 
-  const handleBookClick = (bookId: string) => {
-    setLoadingBookId(bookId); // Show loading overlay
-    window.location.href = `/book/${bookId}`; // Navigate to book details
-  };
- 
+  // Ensure books is always an array
+  const booksArray = Array.isArray(books) ? books : [];
 
-  // Pagination calculation
-  // const indexOfLastBook = currentPage * booksPerPage;
-  // const indexOfFirstBook = indexOfLastBook - booksPerPage;
-  // const totalPages = Math.ceil(filteredBooks.length / booksPerPage);
-  const pages = getPaginationPages(currentPage, totalPages);
-    // Filtered books based on search
-    
-  
-
-  if (books.length === 0) {
+  if (booksArray.length === 0) {
     return (
       <section id="books" className="py-20 px-4 bg-white">
         <div className="max-w-7xl mx-auto text-center">
@@ -100,45 +37,26 @@ export default function BookShowcase() {
             Books will appear here once added through the admin panel.
           </p>
         </div>
-        
       </section>
     );
   }
 
   return (
-    <section id="books" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-white relative">
-      {/* Loading overlay */}
-      {loadingBookId && (
-          <div className="fixed inset-0 z-[1000] bg-black/70 flex items-center justify-center">
-            <div className="w-16 h-16 border-4 border-primary-1 border-t-transparent rounded-full animate-spin"></div>
-          </div>
-        )}
-        
-      
-
+    <section id="books" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-white">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-text-primary mb-8 sm:mb-12 md:mb-16">
           Discover Our Books
         </h2>
-        <div className="max-w-2xl mx-auto mb-6">
-          <input
-            type="text"
-            placeholder="Search for a book..."
-            className="w-full border border-gray-300 rounded-full px-4 py-2 text-text-primary focus:outline-none focus:ring-2 focus:ring-primary-1"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-        </div>
+        
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 md:gap-6 lg:gap-12">
-          {books.map((book) => (
+          {booksArray.map((book) => (
             <div
               key={book.id}
-              className="bg-background-1 rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-4 md:p-6 lg:p-8 shadow-md sm:shadow-lg md:hover:shadow-xl lg:hover:shadow-2xl transition-all duration-300 transform md:hover:-translate-y-2 active:scale-95 flex flex-col cursor-pointer"
-              onClick={() => handleBookClick(book.id)}
+              className="bg-background-1 rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-4 md:p-6 lg:p-8 shadow-md sm:shadow-lg md:hover:shadow-xl lg:hover:shadow-2xl transition-all duration-300 transform md:hover:-translate-y-2 active:scale-95 flex flex-col"
             >
-              {/* Book Cover */}
-              <div className="flex justify-center mb-2 sm:mb-3 md:mb-4 lg:mb-6 group">
-                <div className="relative w-full max-w-[80px] sm:max-w-[100px] md:max-w-[140px] lg:max-w-[192px] aspect-[2/3] transform group-hover:scale-105 transition-transform duration-300">
+              {/* Book Cover - Clickable */}
+              <Link href={`/book/${book.id}`} className="flex justify-center mb-2 sm:mb-3 md:mb-4 lg:mb-6 group">
+                <div className="relative w-full max-w-[80px] sm:max-w-[100px] md:max-w-[140px] lg:max-w-[192px] aspect-[2/3] transform group-hover:scale-105 transition-transform duration-300 cursor-pointer">
                   <Image
                     src={book.coverImage}
                     alt={book.title}
@@ -148,71 +66,47 @@ export default function BookShowcase() {
                     sizes="(max-width: 640px) 80px, (max-width: 768px) 100px, (max-width: 1024px) 140px, 192px"
                   />
                 </div>
-              </div>
+              </Link>
 
-              {/* Book Title */}
-              <h3 className="text-[10px] sm:text-xs md:text-base lg:text-xl font-bold text-text-primary mb-2 sm:mb-3 md:mb-4 text-center line-clamp-2">
-                {book.title}
-              </h3>
-
-              {/* Mobile Description
-              <p className="bg-background-2 lg:hidden text-justify text-sm text-text-primary/70 mt-4 mb-4 px-4 py-3 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
-                {book.description}
-              </p> */}
-
-              {/* Desktop Description */}
+              {/* Book Title - Clickable */}
+              <Link href={`/book/${book.id}`}>
+                <h3 className="text-[10px] sm:text-xs md:text-base lg:text-xl font-bold text-text-primary mb-2 sm:mb-3 md:mb-4 text-center line-clamp-2 hover:text-primary-1 transition-colors duration-200 cursor-pointer">
+                  {book.title}
+                </h3>
+              {/* Description - show on lg+ (desktop only) */}
               <p className="bg-background-2 hidden lg:block text-justify text-sm lg:text-base text-text-primary/70 mt-4 lg:mt-6 line-clamp-3 px-4 py-3 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
                 {book.description}
               </p>
 
-              {/* Desktop Benefits */}
+
+              {/* Benefits - show on all screens */}
               {book.benefits && book.benefits.length > 0 && (
-                <ul className="hidden lg:flex flex-col space-y-1 mb-2 sm:space-y-1.5 md:space-y-2 mb-6">
+                <ul className="space-y-1 sm:space-y-1.5 md:space-y-2 mb-2 sm:mb-3 md:mb-4 lg:mb-6 flex-1">
                   {book.benefits.map((benefit, index) => (
-                    <li key={index} className="flex items-start text-sm lg:text-base">
-                      <span className="text-primary-1 mr-2 mt-0.5 flex-shrink-0">✓</span>
+                    <li key={index} className="flex items-start text-[9px] sm:text-[10px] md:text-xs lg:text-sm xl:text-base">
+                      <span className="text-primary-1 mr-1 sm:mr-1.5 md:mr-2 flex-shrink-0 mt-0.5">✓</span>
                       <span className="text-text-primary/80 leading-tight">{benefit}</span>
                     </li>
                   ))}
                 </ul>
               )}
 
-              {/* Buy Button */}
+              
+
+              
+              </Link>
+              {/* CTA Button - Below book cover and benefits, smaller */}
               <button
-                onClick={(e) => {
-                  e.stopPropagation(); // Prevent triggering book click
-                  handleBuyClick(book.amazonLink, book.id);
-                }}
-                className="bg-primary-1 hover:bg-primary-2 active:bg-primary-2 mt-4 lg:mt-6 text-white font-semibold text-[9px] sm:text-[10px] md:text-xs lg:text-sm py-1.5 sm:py-2 md:py-2.5 lg:py-3 px-3 sm:px-4 md:px-5 lg:px-6 rounded-full transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 w-full mt-auto"
+                onClick={() => handleBuyClick(book.amazonLink, book.id)}
+                className="bg-primary-1 hover:bg-primary-2 active:bg-primary-2 text-white font-semibold text-[9px] sm:text-[10px] md:text-xs lg:text-sm py-1.5 sm:py-2 md:py-2.5 lg:py-3 px-3 sm:px-4 md:px-5 lg:px-6 rounded-full transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 w-full mt-auto"
               >
                 Buy on Amazon
               </button>
             </div>
           ))}
-          
         </div>
-        <div className="flex justify-center mt-6 gap-2 flex-wrap">
-            {pages.map((p, i) =>
-              typeof p === "number" ? (
-                <button
-                  key={i}
-                  className={`px-3 py-1 rounded-full ${
-                    currentPage === p
-                      ? "bg-primary-1 text-white"
-                      : "bg-background-2 text-text-primary"
-                  }`}
-                  onClick={() => setCurrentPage(p)}
-                >
-                  {p}
-                </button>
-              ) : (
-                <span key={i} className="px-3 py-1 text-text-primary">
-                  {p}
-                </span>
-              )
-            )}
-          </div>
       </div>
     </section>
   );
 }
+

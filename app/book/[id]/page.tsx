@@ -114,11 +114,7 @@ export default async function BookDetailsPage({ params }: BookDetailsPageProps) 
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-background-1 via-background-2 to-background-1">
-      {/* Header: hidden on mobile, visible on sm+ screens */}
-      <div className="hidden sm:block">
-        <Header books={allBooks} />
-      </div>
-
+      <Header books={allBooks} />
       <BookDetailsClient book={book} />
       {testimonials.length > 0 && <Testimonials testimonials={testimonials} />}
       {author && <AboutAuthor author={author} />}
