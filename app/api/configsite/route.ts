@@ -4,36 +4,36 @@ import { prisma } from "@/lib/prisma";
 
 export async function GET(req: NextRequest) {
   const search = req.nextUrl.searchParams.get("search");
-  const page = req.nextUrl.searchParams.get("page");
-  const limit = req.nextUrl.searchParams.get("limit");
+  const page = Number(req.nextUrl.searchParams.get("page") ?? 1);
+  const limit = Number(req.nextUrl.searchParams.get("limit") ?? 10);
 
-  const pageNum = Number(page) || 1;
-  const limitNum = Number(limit) || 10;
-  const skip = (pageNum - 1) * limitNum;
-
-  const where: Prisma.BookWhereInput = search
-    ? {
-        title: {
-          contains: String(search),
-          mode: Prisma.QueryMode.insensitive,
-        },
-      }
-    : {};
+  const skip = (page - 1) * limit;
 
   const [books, total] = await Promise.all([
     prisma.book.findMany({
-      where,
+      where: search
+        ? {
+            title: {
+              contains: search,
+              mode: Prisma.QueryMode.insensitive,
+            },
+          }
+        : undefined,
       skip,
-      take: limitNum,
+      take: limit,
       orderBy: { createdAt: "desc" },
     }),
-    prisma.book.count({ where }),
+    prisma.book.count({
+      where: search
+        ? {
+            title: {
+              contains: search,
+              mode: Prisma.QueryMode.insensitive,
+            },
+          }
+        : undefined,
+    }),
   ]);
 
-  return NextResponse.json({
-    books,
-    total,
-    page: pageNum,
-    limit: limitNum,
-  });
+  return NextResponse.json({ books, total, page, limit });
 }
