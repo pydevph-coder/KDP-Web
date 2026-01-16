@@ -45,13 +45,21 @@ export default async function Footer() {
 
   const currentYear = new Date().getFullYear();
 
+  const buildSocialLink = (url: string | null | undefined, name: string): string | null => {
+    if (!url) return null;
+    return url.startsWith("http") ? url : `https://${url}`;
+  };
+
   const socialLinks = [
-    { name: "Twitter", href: author.twitter?.startsWith("http") ? author.twitter : `https://${author.twitter}`, icon: TwitterIcon },
-    { name: "Facebook", href: author.facebook?.startsWith("http") ? author.facebook : `https://${author.facebook}`, icon: FacebookIcon },
-    { name: "Instagram", href: author.instagram?.startsWith("http") ? author.instagram : `https://${author.instagram}`, icon: InstagramIcon },
-    { name: "LinkedIn", href: author.linkedin?.startsWith("http") ? author.linkedin : `https://${author.linkedin}`, icon: LinkedInIcon },
-    { name: "Amazon", href: author.amazon?.startsWith("http") ? author.amazon : `https://${author.amazon}`, icon: AmazonIcon },
-  ].filter(link => link.href);
+    author.twitter && { name: "Twitter", href: buildSocialLink(author.twitter, "Twitter"), icon: TwitterIcon },
+    author.facebook && { name: "Facebook", href: buildSocialLink(author.facebook, "Facebook"), icon: FacebookIcon },
+    author.instagram && { name: "Instagram", href: buildSocialLink(author.instagram, "Instagram"), icon: InstagramIcon },
+    author.linkedin && { name: "LinkedIn", href: buildSocialLink(author.linkedin, "LinkedIn"), icon: LinkedInIcon },
+    author.amazon && { name: "Amazon", href: buildSocialLink(author.amazon, "Amazon"), icon: AmazonIcon },
+    author.pinterest && { name: "Pinterest", href: buildSocialLink(author.pinterest, "Pinterest"), icon: TwitterIcon }, // You may want to create a Pinterest icon
+  ].filter((link): link is { name: string; href: string; icon: React.ComponentType<React.SVGProps<SVGSVGElement>> } => 
+    link !== null && link.href !== null
+  );
   
 
   return (

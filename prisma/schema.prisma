@@ -50,8 +50,15 @@ model Author {
   id          String   @id @default(cuid())
   name        String
   bio         String
-  photo       String? // Optional photo URL
-  credentials String? // e.g., "Licensed Guidance Counselor"
+  photo       String?  // Optional photo URL
+  credentials String?  // e.g., "Licensed Guidance Counselor"
+  email       String?  // Contact email
+  twitter     String?  // Twitter/X profile URL
+  facebook    String?  // Facebook profile URL
+  instagram   String?  // Instagram profile URL
+  linkedin    String?  // LinkedIn profile URL
+  amazon      String?  // Amazon author page URL
+  pinterest   String?  // Pinterest profile URL (priority from web.pdf)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
