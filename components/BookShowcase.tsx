@@ -91,10 +91,10 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
                 {book.title}
               </h3>
 
-              {/* Mobile Description */}
+              {/* Mobile Description
               <p className="bg-background-2 lg:hidden text-justify text-sm text-text-primary/70 mt-4 mb-4 px-4 py-3 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
                 {book.description}
-              </p>
+              </p> */}
 
               {/* Desktop Description */}
               <p className="bg-background-2 hidden lg:block text-justify text-sm lg:text-base text-text-primary/70 mt-4 lg:mt-6 line-clamp-3 px-4 py-3 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
