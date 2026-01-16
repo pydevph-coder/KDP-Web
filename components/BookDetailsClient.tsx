@@ -52,7 +52,7 @@ export default function BookDetailsClient({ book }: BookDetailsClientProps) {
       <section className="py-8 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto space-y-12 sm:space-y-16 md:space-y-20">
          {/* Hero Section with Book Cover */}
-          <div className="grid grid-cols-2 gap-2 sm:gap- md:gap-8 lg:gap-16 items-start">
+          <div className="grid grid-cols-2 gap-2 sm:gap-4 md:gap-8 lg:gap-16 items-start">
             {/* Book Cover - Left Side */}
             <div className="flex justify-start">
               <div className="relative w-full max-w-[120px] sm:max-w-[160px] md:max-w-[240px] lg:max-w-[480px] aspect-[2/3] transform hover:scale-[1.02] transition-transform duration-300 shadow-2xl">
@@ -70,18 +70,20 @@ export default function BookDetailsClient({ book }: BookDetailsClientProps) {
               </div>
             </div>
 
-            {/* Title and Quick Info - Right Side */}
-            <div className="flex flex-col justify-start space-y-1 sm:space-y-2 md:space-y-4">
-              <h1 className="text-lg sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-text-primary leading-tight">
-                {book.title}
-              </h1>
-              
-              {/* Quick Description */}
-              {book.description && (
-                <p className="text-sm sm:text-base md:text-lg lg:text-xl text-text-primary/80 leading-relaxed text-justify mt-0">
-                  {book.description}
-                </p>
-              )}
+            {/* Title, Description, and Button - Right Side */}
+            <div className="flex flex-col justify-between space-y-2 sm:space-y-3 md:space-y-4 h-full">
+              <div>
+                <h1 className="text-lg sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-text-primary leading-tight">
+                  {book.title}
+                </h1>
+                
+                {/* Quick Description */}
+                {book.description && (
+                  <p className="text-sm sm:text-base md:text-lg lg:text-xl text-text-primary/80 leading-relaxed text-justify mt-2">
+                    {book.description}
+                  </p>
+                )}
+              </div>
 
               {/* Primary CTA Button */}
               <button
@@ -95,7 +97,6 @@ export default function BookDetailsClient({ book }: BookDetailsClientProps) {
               </button>
             </div>
           </div>
-
 
 
           {/* Section 1: You're Not Alone */}
