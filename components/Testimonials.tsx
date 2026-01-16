@@ -22,7 +22,7 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
           What Readers Are Saying
         </h2>
 
-        <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6 lg:gap-8">
+        <div className="grid grid-cols-2 gap-2 sm:gap-4 md:gap-6 lg:gap-8">
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
