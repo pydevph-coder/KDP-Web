@@ -37,13 +37,6 @@ const AmazonIcon = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-// Pinterest Icon
-const PinterestIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
-    <path d="M12 0C5.373 0 0 5.372 0 12s5.373 12 12 12 12-5.372 12-12S18.627 0 12 0zm0 19c-.721 0-1.418-.109-2.073-.312.286-.465.713-1.227.95-1.878.088-.331.57-2.103.57-2.103s.145-.29.145-.718c0-.672-.39-1.175-.39-1.175s2.832-3.268 2.832-7.15c0-2.83-2.064-4.914-5.5-4.914-3.75 0-5.7 2.8-5.7 5.7 0 2.1 1.3 3.9 3.1 3.9.6 0 1.1-.4 1.3-.9.2-.7.8-2.7.8-2.7.4.7 1.5 1.3 2.7 1.3 3.5 0 5.9-3.6 5.9-7.5 0-3.1-2.2-5.7-5.4-5.7-3.7 0-6 2.7-6 5.5 0 2 1.2 3.7 2.9 3.7.3 0 .6-.1.7-.2.1-.1.1-.2.1-.3-.1-.4-.3-1.1-.3-1.5 0-1.4 1-2.6 2.5-2.6 1.4 0 2.1 1 2.1 2.3 0 1.6-.9 2.9-2.2 2.9-.4 0-.8-.2-1-.5 0 0-.2.8-.3 1-.1.3-.3.4-.6.4-1.1 0-2.1-1.4-2.1-3.4 0-1.8 1.3-3.4 3.7-3.4 2 0 3.5 1.4 3.5 3.3 0 2-1.2 3.6-2.9 3.6-.6 0-1-.3-1.1-.6 0 0-.2.8-.3 1.1-.1.4-.4.5-.7.5-.6 0-1.1-.8-1.3-1.1-.2-.4-.4-.9-.4-1.4 0-1.1.6-2.1 1.5-2.1.4 0 .7.2.9.4.2.2.3.5.3.8 0 .6-.4 1.5-.9 2.4-.3.6-.4.9-.4 1.3 0 .4.3.7.7.7.9 0 1.6-1.1 1.6-2.6 0-1.3-.9-2.4-2.5-2.4z"/>
-  </svg>
-);
-
 
 export default async function Footer() {
   const author: Author | null = await getAuthor();
@@ -52,21 +45,13 @@ export default async function Footer() {
 
   const currentYear = new Date().getFullYear();
 
-  const buildSocialLink = (url: string | null | undefined, name: string): string | null => {
-    if (!url) return null;
-    return url.startsWith("http") ? url : `https://${url}`;
-  };
-
   const socialLinks = [
-    author.twitter && { name: "Twitter", href: buildSocialLink(author.twitter, "Twitter"), icon: TwitterIcon },
-    author.facebook && { name: "Facebook", href: buildSocialLink(author.facebook, "Facebook"), icon: FacebookIcon },
-    author.instagram && { name: "Instagram", href: buildSocialLink(author.instagram, "Instagram"), icon: InstagramIcon },
-    author.linkedin && { name: "LinkedIn", href: buildSocialLink(author.linkedin, "LinkedIn"), icon: LinkedInIcon },
-    author.amazon && { name: "Amazon", href: buildSocialLink(author.amazon, "Amazon"), icon: AmazonIcon },
-    author.pinterest && { name: "Pinterest", href: buildSocialLink(author.pinterest, "Pinterest"), icon: PinterestIcon },
-  ].filter((link): link is { name: string; href: string; icon: React.ComponentType<React.SVGProps<SVGSVGElement>> } => 
-    link !== null && link.href !== null
-  );
+    { name: "Twitter", href: author.twitter?.startsWith("http") ? author.twitter : `https://${author.twitter}`, icon: TwitterIcon },
+    { name: "Facebook", href: author.facebook?.startsWith("http") ? author.facebook : `https://${author.facebook}`, icon: FacebookIcon },
+    { name: "Instagram", href: author.instagram?.startsWith("http") ? author.instagram : `https://${author.instagram}`, icon: InstagramIcon },
+    { name: "LinkedIn", href: author.linkedin?.startsWith("http") ? author.linkedin : `https://${author.linkedin}`, icon: LinkedInIcon },
+    { name: "Amazon", href: author.amazon?.startsWith("http") ? author.amazon : `https://${author.amazon}`, icon: AmazonIcon },
+  ].filter(link => link.href);
   
 
   return (
