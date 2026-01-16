@@ -56,7 +56,7 @@ function parseBioMarkdown(bio: string): JSX.Element[] {
       elements.push(
         <ul
           key={key++}
-          className="list-disc pl-6 mb-4 text-text-primary/70 ml-7 sd:ml-0 text-base sm:text-lg text-left"
+          className="list-disc pl-6 mb-4 text-text-primary/70 ml-7 sd:ml-0 text-base  text-left"
         >
           {listBuffer.map((item, i) => (
             <li key={i}>{parseInlineHighlights(item)}</li>
@@ -80,7 +80,7 @@ function parseBioMarkdown(bio: string): JSX.Element[] {
       elements.push(
         <p
           key={key++}
-          className="mb-4 text-base sm:text-lg text-text-primary/70 leading-relaxed text-center md:text-left"
+          className="mb-4 text-base sm:text-lg text-text-primary/70 leading-relaxed  text-left"
 
         >
           {parseInlineHighlights(trimmed)}

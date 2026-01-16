@@ -50,11 +50,19 @@ model Author {
   id          String   @id @default(cuid())
   name        String
   bio         String
-  photo       String? // Optional photo URL
-  credentials String? // e.g., "Licensed Guidance Counselor"
+  photo       String?   // Optional photo URL
+  credentials String?   // e.g., "Licensed Guidance Counselor"
+  email       String?   // Author's email
+  amazon      String?   // Link to Amazon page
+  twitter     String?   // Optional social links
+  facebook    String?
+  instagram   String?
+  youtube     String?
+  linkedin    String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
+
 
 model EmailSubscriber {
   id        String   @id @default(cuid())

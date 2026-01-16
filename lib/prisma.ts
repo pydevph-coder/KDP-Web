@@ -29,4 +29,7 @@ export const prisma: PrismaClient =
 if (process.env.NODE_ENV !== 'production' && typeof window === 'undefined') {
   globalForPrisma.prisma = prisma
 }
-
+export async function getAuthor() {
+  // assuming only one author exists
+  return await prisma.author.findFirst();
+}
