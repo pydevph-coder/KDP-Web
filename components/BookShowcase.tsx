@@ -1,10 +1,10 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
-import { useState } from 'react';
+// import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { trackClick } from '@/lib/analytics';
-
+import { usePathname } from "next/navigation";
 interface Book {
   id: string;
   title: string;
@@ -18,7 +18,55 @@ interface BookShowcaseProps {
   books: Book[];
 }
 
-export default function BookShowcase({ books }: BookShowcaseProps) {
+
+
+export default function BookShowcase() {
+  const pathname = usePathname();
+  const [books, setBooks] = useState<Book[]>([]);
+  const [totalBooks, setTotalBooks] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
+  const booksPerPage = 1;
+  // Ensure books is always an array
+  const booksArray = Array.isArray(books) ? books : [];
+  
+  const fetchBooks = async () => {
+    const res = await fetch(
+      `/api/books?search=${encodeURIComponent(searchQuery)}&page=${currentPage}&limit=${booksPerPage}`
+    );
+    const data = await res.json();
+    console.log(data);
+    setBooks(data.books);
+    setTotalBooks(data.total);
+  };
+
+  useEffect(() => {
+    fetchBooks();
+  }, [currentPage, searchQuery]);
+
+  const totalPages = Math.ceil(totalBooks / booksPerPage);
+
+  function getPaginationPages(currentPage: number, totalPages: number, maxButtons = 5) {
+    const pages: (number | string)[] = [];
+    if (totalPages <= maxButtons) {
+      for (let i = 1; i <= totalPages; i++) pages.push(i);
+    } else {
+      const left = Math.max(2, currentPage - 1);
+      const right = Math.min(totalPages - 1, currentPage + 1);
+  
+      pages.push(1);
+      if (left > 2) pages.push("...");
+      for (let i = left; i <= right; i++) pages.push(i);
+      if (right < totalPages - 1) pages.push("...");
+      pages.push(totalPages);
+    }
+    return pages;
+  }
+  
+  
+  useEffect(() => {
+    setLoadingBookId(null); // reset loading when route changes
+  }, [pathname]);
   const [loadingBookId, setLoadingBookId] = useState<string | null>(null);
 
   const handleBuyClick = (link: string, bookId: string) => {
@@ -30,11 +78,18 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
     setLoadingBookId(bookId); // Show loading overlay
     window.location.href = `/book/${bookId}`; // Navigate to book details
   };
+ 
 
-  // Ensure books is always an array
-  const booksArray = Array.isArray(books) ? books : [];
+  // Pagination calculation
+  // const indexOfLastBook = currentPage * booksPerPage;
+  // const indexOfFirstBook = indexOfLastBook - booksPerPage;
+  // const totalPages = Math.ceil(filteredBooks.length / booksPerPage);
+  const pages = getPaginationPages(currentPage, totalPages);
+    // Filtered books based on search
+    
+  
 
-  if (booksArray.length === 0) {
+  if (books.length === 0) {
     return (
       <section id="books" className="py-20 px-4 bg-white">
         <div className="max-w-7xl mx-auto text-center">
@@ -45,6 +100,7 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
             Books will appear here once added through the admin panel.
           </p>
         </div>
+        
       </section>
     );
   }
@@ -64,9 +120,17 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-text-primary mb-8 sm:mb-12 md:mb-16">
           Discover Our Books
         </h2>
-
+        <div className="max-w-2xl mx-auto mb-6">
+          <input
+            type="text"
+            placeholder="Search for a book..."
+            className="w-full border border-gray-300 rounded-full px-4 py-2 text-text-primary focus:outline-none focus:ring-2 focus:ring-primary-1"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 md:gap-6 lg:gap-12">
-          {booksArray.map((book) => (
+          {books.map((book) => (
             <div
               key={book.id}
               className="bg-background-1 rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-4 md:p-6 lg:p-8 shadow-md sm:shadow-lg md:hover:shadow-xl lg:hover:shadow-2xl transition-all duration-300 transform md:hover:-translate-y-2 active:scale-95 flex flex-col cursor-pointer"
@@ -125,7 +189,29 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
               </button>
             </div>
           ))}
+          
         </div>
+        <div className="flex justify-center mt-6 gap-2 flex-wrap">
+            {pages.map((p, i) =>
+              typeof p === "number" ? (
+                <button
+                  key={i}
+                  className={`px-3 py-1 rounded-full ${
+                    currentPage === p
+                      ? "bg-primary-1 text-white"
+                      : "bg-background-2 text-text-primary"
+                  }`}
+                  onClick={() => setCurrentPage(p)}
+                >
+                  {p}
+                </button>
+              ) : (
+                <span key={i} className="px-3 py-1 text-text-primary">
+                  {p}
+                </span>
+              )
+            )}
+          </div>
       </div>
     </section>
   );

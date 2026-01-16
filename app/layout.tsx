@@ -1,28 +1,31 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { getSiteConfig } from "@/lib/getSiteConfig";
+const siteConfig = await getSiteConfig();
 
 export const metadata: Metadata = {
-  title: "Faith-Based Books & Guided Journals | Your Author Name",
-  description: "Discover faith-based books and guided journals for mental wellness, written by a licensed guidance counselor. Transform your spiritual journey today.",
+
+  title: `${siteConfig.siteTitle} | ${siteConfig.siteDescription}`,
+  description: siteConfig.siteDescription,
   keywords: "faith-based books, guided journals, mental wellness, Christian books, prayer journals",
-  authors: [{ name: "Your Author Name" }],
+  authors: [{ name: siteConfig.siteTitle }],
   openGraph: {
-    title: "Faith-Based Books & Guided Journals",
-    description: "Discover faith-based books and guided journals for mental wellness.",
+    title: siteConfig.siteTitle,
+    description: siteConfig.siteDescription,
     type: "website",
     images: [
       {
-        url: "https://m.media-amazon.com/images/I/81bsw6fnUiL._AC_UY327_FMwebp_QL65_.jpg", // You'll need to add this
+        url: siteConfig.metaImageUrl,
         width: 1200,
-        height: 630,
-        alt: "Faith-Based Books & Guided Journals",
+        height: 630, 
+        alt: siteConfig.siteTitle,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Faith-Based Books & Guided Journals",
-    description: "Discover faith-based books and guided journals for mental wellness.",
+    title: siteConfig.siteTitle,
+    description: siteConfig.siteDescription,
   },
   viewport: {
     width: "device-width",
