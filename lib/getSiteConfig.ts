@@ -1,5 +1,19 @@
 import { prisma } from "@/lib/prisma";
 
 export async function getSiteConfig() {
-  return prisma.siteConfig.findFirst();
+  const config = await prisma.siteConfig.findFirst();
+  
+  // Return default values if no config exists
+  if (!config) {
+    return {
+      id: 'default',
+      siteTitle: 'Faith-Based Books & Guided Journals',
+      siteDescription: 'Discover faith-based books and guided journals for mental wellness, written by a licensed guidance counselor.',
+      metaImageUrl: null,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+  }
+  
+  return config;
 }

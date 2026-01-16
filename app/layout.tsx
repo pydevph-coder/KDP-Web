@@ -4,7 +4,6 @@ import { getSiteConfig } from "@/lib/getSiteConfig";
 const siteConfig = await getSiteConfig();
 
 export const metadata: Metadata = {
-
   title: `${siteConfig.siteTitle} | ${siteConfig.siteDescription}`,
   description: siteConfig.siteDescription,
   keywords: "faith-based books, guided journals, mental wellness, Christian books, prayer journals",
@@ -13,19 +12,24 @@ export const metadata: Metadata = {
     title: siteConfig.siteTitle,
     description: siteConfig.siteDescription,
     type: "website",
-    images: [
-      {
-        url: siteConfig.metaImageUrl,
-        width: 1200,
-        height: 630, 
-        alt: siteConfig.siteTitle,
-      },
-    ],
+    ...(siteConfig.metaImageUrl && {
+      images: [
+        {
+          url: siteConfig.metaImageUrl,
+          width: 1200,
+          height: 630,
+          alt: siteConfig.siteTitle,
+        },
+      ],
+    }),
   },
   twitter: {
     card: "summary_large_image",
     title: siteConfig.siteTitle,
     description: siteConfig.siteDescription,
+    ...(siteConfig.metaImageUrl && {
+      images: [siteConfig.metaImageUrl],
+    }),
   },
   viewport: {
     width: "device-width",

@@ -74,3 +74,12 @@ model Click {
   @@index([bookId])
   @@index([createdAt])
 }
+
+model SiteConfig {
+  id            String   @id @default(cuid())
+  siteTitle     String   @default("Faith-Based Books & Guided Journals")
+  siteDescription String @default("Discover faith-based books and guided journals for mental wellness, written by a licensed guidance counselor.")
+  metaImageUrl  String?  // Optional Open Graph image URL
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
