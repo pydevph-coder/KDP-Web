@@ -180,13 +180,13 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
               </p> */}
 
               {/* Desktop Description */}
-              <p className="bg-background-2 hidden lg:block text-justify text-sm lg:text-base text-text-primary/70 mt-4 lg:mt-6 line-clamp-3 px-4 py-3 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+              <p className="flex-1 bg-background-2 hidden lg:block text-justify text-sm lg:text-base text-text-primary/70 mt-4 lg:mt-6 line-clamp-3 px-4 py-3 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
                 {book.description}
               </p>
 
               {/* Desktop Benefits */}
               {book.benefits && book.benefits.length > 0 && (
-                <ul className="hidden lg:flex flex-col space-y-1 mb-2 sm:space-y-1.5 md:space-y-2 mb-6">
+                <ul className="flex-1 hidden lg:flex flex-col space-y-1 mb-2 sm:space-y-1.5 md:space-y-2 mb-6">
                   {book.benefits.map((benefit, index) => (
                     <li key={index} className="flex items-start text-sm lg:text-base">
                       <span className="text-primary-1 mr-2 mt-0.5 flex-shrink-0">✓</span>
@@ -202,7 +202,7 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
                   e.stopPropagation(); // Prevent triggering book click
                   handleBuyClick(book.amazonLink, book.id);
                 }}
-                className="bg-primary-1 hover:bg-primary-2 active:bg-primary-2 mt-4 lg:mt-6 text-white font-semibold text-[9px] sm:text-[10px] md:text-xs lg:text-sm py-1.5 sm:py-2 md:py-2.5 lg:py-3 px-3 sm:px-4 md:px-5 lg:px-6 rounded-full transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 w-full mt-auto"
+                className="bg-primary-1 mt:auto hover:bg-primary-2 active:bg-primary-2 mt-4 lg:mt-6 text-white font-semibold text-[9px] sm:text-[10px] md:text-xs lg:text-sm py-1.5 sm:py-2 md:py-2.5 lg:py-3 px-3 sm:px-4 md:px-5 lg:px-6 rounded-full transition-all duration-300 shadow-md hover:shadow-lg items-center justify-center active:scale-95 w-full mt-auto"
               >
                 Buy on Amazon
               </button>
@@ -215,7 +215,7 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
               typeof p === "number" ? (
                 <button
                   key={i}
-                  className={`px-3 py-1 rounded-full ${
+                  className={`px-3 py-1 rounded-full mt-auto ${
                     currentPage === p
                       ? "bg-primary-1 text-white"
                       : "bg-background-2 text-text-primary"
