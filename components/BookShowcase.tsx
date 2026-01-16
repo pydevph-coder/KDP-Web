@@ -55,7 +55,7 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
   };
   const fetchSiteConfig = async () => {
     const res = await getSiteConfig();
-    setMyConfig(res.data.pagination);
+    setMyConfig(res.pagination);
     // setBooksPerPage(res.pagination);
   };
 
