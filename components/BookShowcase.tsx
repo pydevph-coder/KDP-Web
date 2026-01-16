@@ -5,6 +5,8 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { trackClick } from '@/lib/analytics';
 import { usePathname } from "next/navigation";
+import { getSiteConfig } from "@/lib/getSiteConfig";
+
 interface Book {
   id: string;
   title: string;
@@ -22,7 +24,7 @@ interface BookShowcaseProps {
 
 export default function BookShowcase({ books }: BookShowcaseProps) {
   const pathname = usePathname();
-
+  const siteConfig = await getSiteConfig();
   // Rename state to avoid shadowing the prop
   const [pagedBooks, setPagedBooks] = useState<Book[]>([]);
   const [totalBooks, setTotalBooks] = useState(0);
