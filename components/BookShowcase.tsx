@@ -20,13 +20,23 @@ interface BookShowcaseProps {
 
 
 
-export default function BookShowcase() {
+export default function BookShowcase({ books }: BookShowcaseProps) {
   const pathname = usePathname();
-  const [books, setBooks] = useState<Book[]>([]);
+
+  // Rename state to avoid shadowing the prop
+  const [pagedBooks, setPagedBooks] = useState<Book[]>([]);
   const [totalBooks, setTotalBooks] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const booksPerPage = 1;
+
+  // Example: paginate books from props
+  useEffect(() => {
+    const start = (currentPage - 1) * booksPerPage;
+    const end = start + booksPerPage;
+    setPagedBooks(books.slice(start, end));
+    setTotalBooks(books.length);
+  }, [books, currentPage]);
   // Ensure books is always an array
   const booksArray = Array.isArray(books) ? books : [];
   
@@ -35,8 +45,7 @@ export default function BookShowcase() {
       `/api/books?search=${encodeURIComponent(searchQuery)}&page=${currentPage}&limit=${booksPerPage}`
     );
     const data = await res.json();
-    console.log(data);
-    setBooks(data.books);
+    setPagedBooks(data.books); // ✅ update state, not prop
     setTotalBooks(data.total);
   };
 
@@ -89,7 +98,7 @@ export default function BookShowcase() {
     
   
 
-  if (books.length === 0) {
+  if (setPagedBooks.length === 0) {
     return (
       <section id="books" className="py-20 px-4 bg-white">
         <div className="max-w-7xl mx-auto text-center">
@@ -97,7 +106,7 @@ export default function BookShowcase() {
             Our Books
           </h2>
           <p className="text-lg text-text-primary/70">
-            Books will appear here once added through the admin panel.
+            No Books Found
           </p>
         </div>
         
@@ -130,7 +139,7 @@ export default function BookShowcase() {
           />
         </div>
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 md:gap-6 lg:gap-12">
-          {books.map((book) => (
+          {pagedBooks.map((book) => (
             <div
               key={book.id}
               className="bg-background-1 rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-4 md:p-6 lg:p-8 shadow-md sm:shadow-lg md:hover:shadow-xl lg:hover:shadow-2xl transition-all duration-300 transform md:hover:-translate-y-2 active:scale-95 flex flex-col cursor-pointer"

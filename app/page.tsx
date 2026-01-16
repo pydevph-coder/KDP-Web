@@ -11,7 +11,20 @@ import { prisma } from '@/lib/prisma';
 import type { Author, Book, Testimonial } from '@prisma/client';
 
 export const dynamic = 'force-dynamic';
-
+export type Book = {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  slug: string | null;
+  title: string;
+  coverImage: string;
+  description: string;
+  introduction: string | null;
+  amazonLink: string;
+  author: string | null;
+  order: number;
+  // add any other fields you use
+};
 export default async function Home() {
   let books: Book[] = [];
   let testimonials: Testimonial[] = [];
