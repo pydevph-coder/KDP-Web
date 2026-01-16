@@ -9,29 +9,24 @@ export async function GET(req: NextRequest) {
 
   const skip = (page - 1) * limit;
 
+  const bookWhere: Prisma.BookWhereInput | undefined = search
+    ? {
+        title: {
+          contains: search,
+          mode: Prisma.QueryMode.insensitive,
+        },
+      }
+    : undefined;
+
   const [books, total] = await Promise.all([
     prisma.book.findMany({
-      where: search
-        ? {
-            title: {
-              contains: search,
-              mode: Prisma.QueryMode.insensitive,
-            },
-          }
-        : undefined,
+      where: bookWhere,
       skip,
       take: limit,
       orderBy: { createdAt: "desc" },
     }),
     prisma.book.count({
-      where: search
-        ? {
-            title: {
-              contains: search,
-              mode: Prisma.QueryMode.insensitive,
-            },
-          }
-        : undefined,
+      where: bookWhere,
     }),
   ]);
 
