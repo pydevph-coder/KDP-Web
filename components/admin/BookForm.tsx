@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import type { Book } from "@prisma/client";
+import type { FullBook } from "./BooksManager";
 
 interface BookFormProps {
-  book: Book | null;
+  book: FullBook | null;
   onClose: () => void;
   onSave: () => void;
 }
