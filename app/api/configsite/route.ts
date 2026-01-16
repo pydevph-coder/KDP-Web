@@ -1,24 +1,39 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 
-export async function GET() {
-  try {
-    // Single global config
-    const config = await prisma.siteConfig.findFirst();
+export async function GET(req: NextRequest) {
+  const search = req.nextUrl.searchParams.get("search");
+  const page = req.nextUrl.searchParams.get("page");
+  const limit = req.nextUrl.searchParams.get("limit");
 
-    if (!config) {
-      return NextResponse.json(
-        { error: "Site config not found" },
-        { status: 404 }
-      );
-    }
+  const pageNum = Number(page) || 1;
+  const limitNum = Number(limit) || 10;
+  const skip = (pageNum - 1) * limitNum;
 
-    return NextResponse.json(config);
-  } catch (error) {
-    console.error("SiteConfig API error:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
-  }
+  const where: Prisma.BookWhereInput = search
+    ? {
+        title: {
+          contains: String(search),
+          mode: Prisma.QueryMode.insensitive,
+        },
+      }
+    : {};
+
+  const [books, total] = await Promise.all([
+    prisma.book.findMany({
+      where,
+      skip,
+      take: limitNum,
+      orderBy: { createdAt: "desc" },
+    }),
+    prisma.book.count({ where }),
+  ]);
+
+  return NextResponse.json({
+    books,
+    total,
+    page: pageNum,
+    limit: limitNum,
+  });
 }
