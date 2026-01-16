@@ -24,15 +24,14 @@ interface BookShowcaseProps {
 
 export default function BookShowcase({ books }: BookShowcaseProps) {
   const pathname = usePathname();
-  const [siteConfig, setSiteConfig] = useState<SiteConfig | undefined>({
-    pagination: 10,
-  });
+  const [myConfig, setMyConfig] = useState<any | null>(null);
+
   // Rename state to avoid shadowing the prop
   const [pagedBooks, setPagedBooks] = useState<Book[]>([]);
   const [totalBooks, setTotalBooks] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
-  const booksPerPage = siteConfig.pagination;
+  const booksPerPage = myConfig?.pagination ?? 10;
    useEffect(() => {
     fetchSiteConfig();
   }, []);
@@ -56,7 +55,7 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
   };
   const fetchSiteConfig = async () => {
     const res = await getSiteConfig();
-    setSiteConfig(res);
+    setMyConfig(res.data.pagination);
     // setBooksPerPage(res.pagination);
   };
 
