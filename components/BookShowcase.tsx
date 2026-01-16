@@ -5,7 +5,8 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { trackClick } from '@/lib/analytics';
 import { usePathname } from "next/navigation";
-import { getSiteConfig } from "@/lib/getSiteConfig";
+// import { getSiteConfig } from "@/lib/getSiteConfig";
+// import GET from '@/app/api/configsite/route';
 
 interface Book {
   id: string;
@@ -31,7 +32,7 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
   const [totalBooks, setTotalBooks] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
-  const booksPerPage = myConfig?.pagination ?? 10;
+  const [booksPerPage, setBooksPerPage] = useState(10);
    useEffect(() => {
     fetchSiteConfig();
   }, []);
@@ -39,9 +40,20 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
   useEffect(() => {
     const start = (currentPage - 1) * booksPerPage;
     const end = start + booksPerPage;
-    setPagedBooks(books.slice(start, end));
-    setTotalBooks(books.length);
-  }, [books, currentPage]);
+    setPagedBooks(
+      books
+        .filter((book) =>
+          book.title.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+        .slice(start, end)
+    );
+    setTotalBooks(
+      books.filter((book) =>
+        book.title.toLowerCase().includes(searchQuery.toLowerCase())
+      ).length
+    );
+  }, [books, currentPage, booksPerPage, searchQuery]);
+  
   // Ensure books is always an array
   const booksArray = Array.isArray(books) ? books : [];
   
@@ -53,15 +65,12 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
     setPagedBooks(data.books); // ✅ update state, not prop
     setTotalBooks(data.total);
   };
-  const fetchSiteConfig = async () => {
-    const res = await getSiteConfig();
-    setMyConfig(res.pagination);
-    // setBooksPerPage(res.pagination);
-  };
-
-  useEffect(() => {
-    fetchBooks();
-  }, [currentPage, searchQuery]);
+    const fetchSiteConfig = async () => {
+      const res = await fetch('/api/configsite');
+      const data = await res.json();
+      setMyConfig(data.pagination);
+      setBooksPerPage(data.pagination);
+    };
 
   const totalPages = Math.ceil(totalBooks / booksPerPage);
 
