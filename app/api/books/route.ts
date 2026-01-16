@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
     ? {
         title: {
           contains: search,
-          mode: Prisma.QueryMode.insensitive,
+          mode: 'insensitive' as const,
         },
       }
     : undefined;
