@@ -8,23 +8,10 @@ import AboutAuthor from '@/components/AboutAuthor';
 import EmailSignup from '@/components/EmailSignup';
 import Footer from '@/components/Footer';
 import { prisma } from '@/lib/prisma';
-import type { Author, Book, Testimonial } from '@prisma/client';
+import type { Author, Book as PrismaBook, Testimonial } from '@prisma/client';
 
 export const dynamic = 'force-dynamic';
-export type Book = {
-  id: string;
-  createdAt: Date;
-  updatedAt: Date;
-  slug: string | null;
-  title: string;
-  coverImage: string;
-  description: string;
-  introduction: string | null;
-  amazonLink: string;
-  author: string | null;
-  order: number;
-  // add any other fields you use
-};
+
 export default async function Home() {
   let books: Book[] = [];
   let testimonials: Testimonial[] = [];
@@ -50,9 +37,9 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen">
-      <Header books={books} />
-      <Hero books={books} />
-      <BookShowcase books={books} />
+      <Header books={books as PrismaBook[]} />
+      <Hero books={books as PrismaBook[]} />
+      <BookShowcase books={books as PrismaBook[]} />
       {/* <WhoItsFor />
       <WhyTheseBooks /> */}
       {testimonials.length > 0 && <Testimonials testimonials={testimonials} />}
