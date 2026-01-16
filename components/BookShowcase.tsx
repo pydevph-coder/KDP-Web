@@ -70,6 +70,7 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
       const data = await res.json();
       setMyConfig(data.pagination);
       setBooksPerPage(data.pagination);
+      console.log("BooksPerPage:", data.pagination);
     };
 
   const totalPages = Math.ceil(totalBooks / booksPerPage);
