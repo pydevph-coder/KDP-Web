@@ -1,21 +1,11 @@
 'use client';
 
 import Image from 'next/image';
-
-interface Book {
-  id: string;
-  title: string;
-  coverImage: string;
-  description: string;
-  amazonLink: string;
-  benefits: string[];
-  featured: boolean;
-  order: number;
-}
+import type { FullBook } from "./BooksManager";
 
 interface BookListProps {
-  books: Book[];
-  onEdit: (book: Book) => void;
+  books: FullBook[];
+  onEdit: (book: FullBook) => void;
   onDelete: (id: string) => void;
 }
 
