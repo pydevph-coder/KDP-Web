@@ -73,23 +73,29 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
                 <h3 className="text-[10px] sm:text-xs md:text-base lg:text-xl font-bold text-text-primary mb-2 sm:mb-3 md:mb-4 text-center line-clamp-2 hover:text-primary-1 transition-colors duration-200 cursor-pointer">
                   {book.title}
                 </h3>
-              {/* Description - show on lg+ (desktop only) */}
-              <p className="bg-background-2 hidden lg:block text-justify text-sm lg:text-base text-text-primary/70 mt-4 lg:mt-6 line-clamp-3 px-4 py-3 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
-                {book.description}
-              </p>
+              {/* Description - show on all screens (mobile + desktop) */}
+              <p className="bg-background-2 lg:hidden text-justify text-sm text-text-primary/70 mt-4 mb-4 px-4 py-3 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+  {book.description}
+</p>
 
 
-              {/* Benefits - show on all screens */}
-              {book.benefits && book.benefits.length > 0 && (
-                <ul className="space-y-1 sm:space-y-1.5 md:space-y-2 mb-2 sm:mb-3 md:mb-4 lg:mb-6 flex-1">
-                  {book.benefits.map((benefit, index) => (
-                    <li key={index} className="flex items-start text-[9px] sm:text-[10px] md:text-xs lg:text-sm xl:text-base">
-                      <span className="text-primary-1 mr-1 sm:mr-1.5 md:mr-2 flex-shrink-0 mt-0.5">✓</span>
-                      <span className="text-text-primary/80 leading-tight">{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
+{/* Description - show on desktop only (optional, keeps your previous style) */}
+<p className="bg-background-2 hidden lg:block text-justify text-sm lg:text-base text-text-primary/70  mt-4 lg:mt-6 line-clamp-3 px-4 py-3 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+  {book.description}
+</p>
+
+{/* Benefits - show on lg+ screens only */}
+{book.benefits && book.benefits.length > 0 && (
+  <ul className="hidden lg:flex flex-col space-y-1 mb-2 sm:space-y-1.5 md:space-y-2 mb-6">
+    {book.benefits.map((benefit, index) => (
+      <li key={index} className="flex items-start text-sm lg:text-base">
+        <span className="text-primary-1 mr-2 mt-0.5 flex-shrink-0">✓</span>
+        <span className="text-text-primary/80 leading-tight">{benefit}</span>
+      </li>
+    ))}
+  </ul>
+)}
+
 
               
 
@@ -98,7 +104,7 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
               {/* CTA Button - Below book cover and benefits, smaller */}
               <button
                 onClick={() => handleBuyClick(book.amazonLink, book.id)}
-                className="bg-primary-1 hover:bg-primary-2 active:bg-primary-2 text-white font-semibold text-[9px] sm:text-[10px] md:text-xs lg:text-sm py-1.5 sm:py-2 md:py-2.5 lg:py-3 px-3 sm:px-4 md:px-5 lg:px-6 rounded-full transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 w-full mt-auto"
+                className="bg-primary-1 hover:bg-primary-2 active:bg-primary-2 mt-4 lg:mt-6 text-white font-semibold text-[9px] sm:text-[10px] md:text-xs lg:text-sm py-1.5 sm:py-2 md:py-2.5 lg:py-3 px-3 sm:px-4 md:px-5 lg:px-6 rounded-full transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 w-full mt-auto"
               >
                 Buy on Amazon
               </button>
