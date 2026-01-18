@@ -52,7 +52,7 @@ export default function Header({ books }: HeaderProps) {
           {featuredBook && (
             <button
               onClick={handleBuyClick}
-              className="md:hidden btn-primary text-xs sm:text-sm py-2 px-4 sm:px-6"
+              className=" btn-primary text-xs sm:text-sm py-2 px-4 sm:px-6"
               aria-label="Buy on Amazon"
             >
               Buy on Amazon
