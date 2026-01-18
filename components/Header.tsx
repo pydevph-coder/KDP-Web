@@ -49,7 +49,7 @@ export default function Header({ books }: HeaderProps) {
           </Link>
 
            
-          {featuredBook && (
+          {/*{featuredBook && (
             <button
               onClick={handleBuyClick}
               className=" btn-primary text-xs sm:text-sm py-2 px-4 sm:px-6"
@@ -57,7 +57,7 @@ export default function Header({ books }: HeaderProps) {
             >
               Buy on Amazon
             </button>
-          )} 
+          )} */}
 
           {/* Navigation - desktop only */}
           {/* <nav className="hidden md:flex items-center gap-6">
