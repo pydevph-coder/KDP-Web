@@ -122,7 +122,7 @@ export default function AboutAuthor({ author }: AboutAuthorProps) {
             </div>
           )}
 
-          <div className="flex-1 text-center md:text-left px-2 sm:px-0">
+          <div className="flex-1 text-center md:text md:ml4-left px-2 sm:px-0">
             <h3 className="text-2xl sm:text-3xl font-bold text-text-primary mb-2">
               {author.name}
             </h3>
