@@ -81,25 +81,28 @@ export default function BookForm({ book, onClose, onSave }: BookFormProps) {
   const handleFileUpload = async (file: File) => {
     setUploading(true);
     setError("");
-    
+  
     try {
-      const formData = new FormData();
-      formData.append('file', file);
-      
+      const uploadData = new FormData(); // ✅ renamed
+      uploadData.append('file', file);
+  
       const response = await fetch('/api/upload/image', {
         method: 'POST',
-        body: formData,
+        body: uploadData,
       });
-      
+  
       if (!response.ok) {
         const data = await response.json();
         throw new Error(data.error || 'Failed to upload image');
       }
-      
+  
       const data = await response.json();
-      setFormData({ ...formData, coverImage: data.url });
-      
-      // Clear file input after successful upload (works for both add and update)
+  
+      setFormData(prev => ({
+        ...prev,
+        coverImage: data.url, // ✅ string URL only
+      }));
+  
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
       }
@@ -109,7 +112,7 @@ export default function BookForm({ book, onClose, onSave }: BookFormProps) {
       setUploading(false);
     }
   };
-
+  
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
