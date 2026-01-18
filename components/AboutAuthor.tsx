@@ -128,12 +128,12 @@ export default function AboutAuthor({ author }: AboutAuthorProps) {
             </h3>
 
             {author.credentials && (
-              <p className="text-base sm:text-lg text-primary-1 font-semibold mb-4">
+              <p md:ml4 className="text-base sm:text-lg text-primary-1 font-semibold mb-4">
                 {author.credentials}
               </p>
             )}
 
-            <div>
+            <div md:ml4>
               {bioContent}
             </div>
           </div>
