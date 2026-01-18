@@ -73,8 +73,10 @@ export async function PUT(
     return NextResponse.json(book);
   } catch (error) {
     console.error('Update book error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Failed to update book';
+    // Return detailed error for debugging
     return NextResponse.json(
-      { error: 'Failed to update book' },
+      { error: `Failed to update book: ${errorMessage}` },
       { status: 500 }
     );
   }

@@ -58,8 +58,10 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(book);
   } catch (error) {
     console.error('Create book error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Failed to create book';
+    // Return detailed error for debugging
     return NextResponse.json(
-      { error: 'Failed to create book' },
+      { error: `Failed to create book: ${errorMessage}` },
       { status: 500 }
     );
   }

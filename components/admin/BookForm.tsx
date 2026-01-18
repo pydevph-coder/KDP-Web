@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import type { FullBook } from "./BooksManager";
 
@@ -11,14 +11,23 @@ interface BookFormProps {
 }
 
 // Helpers for textarea arrays
-const parseTextareaToArray = (text: string): string[] =>
-  text
+const parseTextareaToArray = (text: string | undefined | null): string[] => {
+  if (!text || typeof text !== 'string') return [];
+  return text
     .split("\n")
     .map((line) => line.trim())
     .filter((line) => line.length > 0);
+};
 
 const arrayToTextarea = (arr?: string[] | null): string =>
   arr?.join("\n") ?? "";
+
+// Helper to safely trim a string (handle undefined/null)
+const safeTrim = (value: string | undefined | null): string | null => {
+  if (!value || typeof value !== 'string') return null;
+  const trimmed = value.trim();
+  return trimmed.length > 0 ? trimmed : null;
+};
 
 export default function BookForm({ book, onClose, onSave }: BookFormProps) {
   const [formData, setFormData] = useState({
@@ -41,7 +50,9 @@ export default function BookForm({ book, onClose, onSave }: BookFormProps) {
     order: 0,
   });
   const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (book) {
@@ -67,6 +78,45 @@ export default function BookForm({ book, onClose, onSave }: BookFormProps) {
     }
   }, [book]);
 
+  const handleFileUpload = async (file: File) => {
+    setUploading(true);
+    setError("");
+    
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      
+      const response = await fetch('/api/upload/image', {
+        method: 'POST',
+        body: formData,
+      });
+      
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || 'Failed to upload image');
+      }
+      
+      const data = await response.json();
+      setFormData({ ...formData, coverImage: data.url });
+      
+      // Clear file input after successful upload (works for both add and update)
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to upload image');
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      handleFileUpload(file);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -81,18 +131,18 @@ export default function BookForm({ book, onClose, onSave }: BookFormProps) {
         title: formData.title,
         coverImage: formData.coverImage,
         description: formData.description,
-        introduction: formData.introduction.trim() || null,
+        introduction: safeTrim(formData.introduction),
         amazonLink: formData.amazonLink,
         painPoints: parseTextareaToArray(formData.painPoints),
-        painPointsHeader: formData.painPointsHeader.trim() || null,
+        painPointsHeader: safeTrim(formData.painPointsHeader),
         benefits: parseTextareaToArray(formData.benefits),
-        benefitsHeader: formData.benefitsHeader.trim() || null,
+        benefitsHeader: safeTrim(formData.benefitsHeader),
         features: parseTextareaToArray(formData.features),
-        featuresHeader: formData.featuresHeader.trim() || null,
+        featuresHeader: safeTrim(formData.featuresHeader),
         targetAudience: parseTextareaToArray(formData.targetAudience),
-        targetAudienceHeader: formData.targetAudienceHeader.trim() || null,
-        faithMessage: formData.faithMessage.trim() || null,
-        faithMessageHeader: formData.faithMessageHeader.trim() || null,
+        targetAudienceHeader: safeTrim(formData.targetAudienceHeader),
+        faithMessage: safeTrim(formData.faithMessage),
+        faithMessageHeader: safeTrim(formData.faithMessageHeader),
         featured: formData.featured,
         order: formData.order,
       };
@@ -104,13 +154,17 @@ export default function BookForm({ book, onClose, onSave }: BookFormProps) {
       });
 
       if (!response.ok) {
-        const data = await response.json();
-        setError(data.error || "Failed to save book");
+        const data = await response.json().catch(() => ({ error: 'Unknown error' }));
+        const errorMessage = data.error || `HTTP ${response.status}: ${response.statusText}`;
+        console.error('Save book error:', errorMessage);
+        setError(errorMessage);
       } else {
         onSave();
       }
-    } catch {
-      setError("Failed to save book");
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to save book';
+      console.error('Save book exception:', err);
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -144,22 +198,50 @@ export default function BookForm({ book, onClose, onSave }: BookFormProps) {
 
               <div>
                 <label className="block text-sm font-medium text-text-primary mb-2">
-                  Cover Image URL *
+                  Cover Image *
                 </label>
-                <input
-                  type="url"
-                  value={formData.coverImage}
-                  onChange={(e) => setFormData({ ...formData, coverImage: e.target.value })}
-                  required
-                  className="w-full px-4 py-2 border-2 border-primary-1 rounded-lg focus:outline-none focus:border-primary-2"
-                />
+                
+                {/* File Upload Option */}
+                <div className="mb-3">
+                  <label className="block text-xs font-medium text-text-primary/70 mb-2">
+                    Upload Image (or use URL below)
+                  </label>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    disabled={uploading}
+                    className="block w-full text-sm text-text-primary/70 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary-1 file:text-white hover:file:bg-primary-2 file:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                  />
+                  {uploading && (
+                    <p className="mt-2 text-sm text-primary-1">Uploading image...</p>
+                  )}
+                </div>
+                
+                {/* URL Input Option */}
+                <div>
+                  <label className="block text-xs font-medium text-text-primary/70 mb-2">
+                    Or enter image URL
+                  </label>
+                  <input
+                    type="url"
+                    value={formData.coverImage}
+                    onChange={(e) => setFormData({ ...formData, coverImage: e.target.value })}
+                    required
+                    placeholder="https://example.com/image.jpg"
+                    className="w-full px-4 py-2 border-2 border-primary-1 rounded-lg focus:outline-none focus:border-primary-2"
+                  />
+                </div>
+                
+                {/* Image Preview */}
                 {formData.coverImage && (
-                  <div className="mt-2 w-32 h-48 relative mx-auto">
+                  <div className="mt-4 w-32 h-48 relative mx-auto">
                     <Image
                       src={formData.coverImage}
                       alt="Preview"
                       fill
-                      className="object-cover rounded"
+                      className="object-cover rounded shadow-lg"
                       onError={(e) => {
                         (e.target as HTMLImageElement).style.display = 'none';
                       }}
