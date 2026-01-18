@@ -109,7 +109,7 @@ export default function AboutAuthor({ author }: AboutAuthorProps) {
         <div className="flex flex-col md:flex-row gap-6 sm:gap-8 items-center">
           {author.photo && (
             <div className="flex-shrink-0">
-              <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-64 md:h-64 rounded-full overflow-hidden shadow-2xl">
+              <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-64 md:h-64 rounded-full overflow-hidden shadow-2xl md:mr2">
                 <Image
                   src={author.photo}
                   alt={author.name}
@@ -122,7 +122,7 @@ export default function AboutAuthor({ author }: AboutAuthorProps) {
             </div>
           )}
 
-          <div className="flex-1 text-center md:text md:ml4-left px-2 sm:px-0">
+          <div className="flex-1 text-center md:text-left px-2 sm:px-0">
             <h3 className="text-2xl sm:text-3xl font-bold text-text-primary mb-2">
               {author.name}
             </h3>
