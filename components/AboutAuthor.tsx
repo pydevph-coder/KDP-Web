@@ -128,7 +128,7 @@ export default function AboutAuthor({ author }: AboutAuthorProps) {
             </h3>
 
             {author.credentials && (
-              <p md:ml4 className="text-base sm:text-lg text-primary-1 font-semibold mb-4">
+              <p  className="md:ml4 text-base sm:text-lg text-primary-1 font-semibold mb-4">
                 {author.credentials}
               </p>
             )}
