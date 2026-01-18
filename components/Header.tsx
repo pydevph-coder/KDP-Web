@@ -48,7 +48,7 @@ export default function Header({ books }: HeaderProps) {
             </div>
           </Link>
 
-          {/* Buy on Amazon button - mobile only
+           
           {featuredBook && (
             <button
               onClick={handleBuyClick}
@@ -57,7 +57,7 @@ export default function Header({ books }: HeaderProps) {
             >
               Buy on Amazon
             </button>
-          )} */}
+          )} 
 
           {/* Navigation - desktop only */}
           {/* <nav className="hidden md:flex items-center gap-6">
