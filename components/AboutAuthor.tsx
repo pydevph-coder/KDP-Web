@@ -133,7 +133,7 @@ export default function AboutAuthor({ author }: AboutAuthorProps) {
               </p>
             )}
 
-            <div md:ml4>
+            <div className="md:ml4">
               {bioContent}
             </div>
           </div>
