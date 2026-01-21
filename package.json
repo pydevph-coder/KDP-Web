@@ -9,7 +9,13 @@
     "lint": "next lint",
     "db:push": "prisma db push",
     "db:studio": "prisma studio",
-    "db:generate": "prisma generate"
+    "db:generate": "prisma generate",
+    "db:seed": "npx tsx prisma/seed.ts",
+    "db:seed2": "npx tsx prisma/seed2.ts",
+    "db:seed3": "npx tsx prisma/seed3.ts",
+    "db:seed4": "npx tsx prisma/seed4.ts",
+    "db:seed5": "npx tsx prisma/seed5.ts",
+    "db:seed7": "npx tsx prisma/seed7.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.19.1",
