@@ -310,9 +310,10 @@ export default function BookForm({ book, onClose, onSave }: BookFormProps) {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-text-primary mb-2">
-                  Section 2 Header (e.g., "Meet Your Faithful Goal Journal" or "Meet [Book Name]")
-                </label>
+              <label>
+                {`Section 2 Header (e.g., "Meet Your Faithful Goal Journal" or "Meet [Book Name]")`}
+              </label>
+
                 <input
                   type="text"
                   value={formData.introductionHeader}
@@ -332,7 +333,7 @@ export default function BookForm({ book, onClose, onSave }: BookFormProps) {
                 />
                 <div className="mt-3">
                   <label className="block text-sm font-medium text-text-primary mb-2">
-                    Introduction Markdown (optional — use this to preserve \"No pressure.\" style lines + bullets)
+                    {`Introduction Markdown (optional — use this to preserve "No pressure." style lines + bullets)`}
                   </label>
                   <textarea
                     value={formData.introductionBodyMd}
