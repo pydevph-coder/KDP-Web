@@ -7,12 +7,19 @@ import BookList from "./BookList";
 import type { Book } from "@prisma/client";
 
 export interface FullBook extends Book {
+  introductionHeader: string | null;
+  introductionBodyMd: string | null;
   painPointsHeader: string | null;
+  painPointsBodyMd: string | null;
   benefitsHeader: string | null;
+  benefitsBodyMd: string | null;
   featuresHeader: string | null;
+  featuresBodyMd: string | null;
   targetAudienceHeader: string | null;
+  targetAudienceBodyMd: string | null;
   faithMessage: string | null;
   faithMessageHeader: string | null;
+  faithMessageBodyMd: string | null;
 }
 // export interface FullBook {
 //   id: string;
@@ -65,11 +72,18 @@ export default function BooksManager() {
         features: b.features || [],
         targetAudience: b.targetAudience || [],
         painPointsHeader: b.painPointsHeader ?? null,
+        painPointsBodyMd: b.painPointsBodyMd ?? null,
         benefitsHeader: b.benefitsHeader ?? null,
+        benefitsBodyMd: b.benefitsBodyMd ?? null,
         featuresHeader: b.featuresHeader ?? null,
+        featuresBodyMd: b.featuresBodyMd ?? null,
         targetAudienceHeader: b.targetAudienceHeader ?? null,
+        targetAudienceBodyMd: b.targetAudienceBodyMd ?? null,
         faithMessage: b.faithMessage ?? null,
         faithMessageHeader: b.faithMessageHeader ?? null,
+        faithMessageBodyMd: b.faithMessageBodyMd ?? null,
+        introductionHeader: b.introductionHeader ?? null,
+        introductionBodyMd: b.introductionBodyMd ?? null,
       }));
   
       setBooks(booksWithDates);

@@ -14,6 +14,13 @@ const FacebookIcon = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
+// Pinterest Icon
+const PinterestIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+    <path d="M12 0C5.37 0 0 5.37 0 12c0 4.9 2.94 9.11 7.15 10.98-.1-.93-.19-2.36.04-3.38.21-.93 1.35-5.93 1.35-5.93s-.34-.68-.34-1.69c0-1.58.92-2.76 2.07-2.76.98 0 1.45.73 1.45 1.61 0 .98-.62 2.44-.94 3.79-.26 1.13.56 2.05 1.66 2.05 1.99 0 3.52-2.1 3.52-5.13 0-2.68-1.93-4.56-4.69-4.56-3.2 0-5.08 2.4-5.08 4.88 0 .97.37 2.01.84 2.58a.34.34 0 01.08.32c-.09.35-.3 1.13-.34 1.29-.05.21-.18.26-.41.16-1.53-.71-2.49-2.94-2.49-4.74 0-3.86 2.81-7.41 8.11-7.41 4.26 0 7.58 3.04 7.58 7.11 0 4.25-2.68 7.67-6.39 7.67-1.25 0-2.42-.65-2.82-1.41l-.77 2.92c-.28 1.07-1.04 2.42-1.55 3.24C9.68 23.84 10.82 24 12 24c6.63 0 12-5.37 12-12S18.63 0 12 0z"/>
+  </svg>
+);
+
 // Instagram Icon
 const InstagramIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
@@ -31,9 +38,12 @@ const LinkedInIcon = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 // Amazon Icon
+
+// Amazon Icon (official-style)
 const AmazonIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg viewBox="0 0 512 512" fill="currentColor" {...props}>
-    <path d="M502.6 232.5c-1.2-3.4-5.1-5.2-8.5-4.1-4.5 1.4-11.4 3.1-18.1 5.1-22.6 6.8-50.4 15.1-86.8 15.1-59.5 0-102.8-31.1-125.5-65.4 12.1-6.1 21.6-12.3 30.8-19.6 18.9-14.1 30.6-30.5 35.1-49.2 1-4.4-1.7-8.8-6-9.8-4.5-1-8.8 1.7-9.8 6-3.6 15.8-14.1 30.1-30.8 42.2-12.2 8.9-26.7 15.5-44.2 20.6-6.1 1.7-12.5 3.3-18.7 4.7-42.5 9.1-88.1 6-132.8-11.2-3.8-1.3-8 0.8-9.3 4.6-1.3 3.8 0.8 8 4.6 9.3 44.1 14.9 90.1 17.9 134.1 9 6.4-1.4 12.7-3 19-4.8 16.5-4.7 31.7-11.3 45.1-20.1 13.3-8.3 23.7-18.3 29.2-29.8 4.9-10.7 6-21.8 3.3-32.4-4.7-18.7-19.6-34.3-41.3-48.4-8.1-5.9-16.8-11.5-27-16.9-3.5-2.1-8-1-10.2 2.5-2.1 3.5-1 8 2.5 10.2 19.1 11.5 33.7 25.7 39.3 43.5 3.5 12.9 2.4 25.8-3.1 38-5.6 12.5-15.8 23.3-30.4 32.3-8.2 5-17.6 9.4-28.2 13.4-5.5 2.1-11.1 4-16.6 5.7-51.2 16.2-103.1 18.3-147.6 4.6-3.8-1.1-7.7 1.2-8.8 5-1.1 3.8 1.2 7.7 5 8.8 46.4 13.2 99.4 11.2 151.5-5.3 5.6-1.8 11.3-3.7 16.8-5.8 10.7-4.1 20.8-8.6 29.3-13.7 15.3-9.3 25.8-20.8 31.8-33.5 6.3-13.3 7.7-27.3 4.1-41-6.8-24.6-28.6-46.6-63.5-66.7-4-2.3-8.9-1.1-11.2 3-2.3 4-1.1 8.9 3 11.2 31.8 18.1 51.4 37.4 57.2 57.5 3.1 11.3 2 22.9-3.4 34.4-5.6 12-16.3 22.1-31 30.1-8.7 5.1-18.6 9.4-29.7 13.1-5.8 2-11.6 3.8-17.3 5.4-52.8 15.2-105.3 17.6-150.6 5.2-3.7-1-7.7 1.2-8.7 5-1 3.7 1.2 7.7 5 8.7 45.5 12.4 98.5 10.1 151-5.3 5.7-1.6 11.4-3.4 17.2-5.4 11.1-3.7 21.3-8 30.2-13 17.8-10.5 29.9-23.5 36.3-38.9 6.9-16 7.5-32.3 1.9-48.1z"/>
+  <svg viewBox="0 0 448 512" fill="currentColor" {...props}>
+    <path d="M257.2 162.7c-48.7 0-75.7 37.2-75.7 89.7 0 39.7 22.5 79.5 63.8 79.5 25.8 0 48.4-17.1 59.7-43.5v29.7c0 6.2 5 11.2 11.2 11.2h40.7c6.2 0 11.2-5 11.2-11.2V226c0-60.5-25.7-99.3-110.4-99.3-44.7 0-77.2 14.8-93.4 52.4-2.2 5.2.5 11.1 5.8 12.9l39.3 13c5.1 1.7 10.7-1 12.5-6 7.3-19.6 21.3-29.1 44.2-29.1 24.5 0 38.6 14.6 38.6 41.8v7z"/>
+    <path d="M392.6 354.3c-4.4-3.3-12.8-1.6-18.1.3-19.8 6.9-48.8 16.1-81.8 16.1-74.3 0-141.1-39.6-170.3-106.1-2.2-5-7.9-6.9-12.7-4.3l-26.7 15.4c-4.5 2.6-6.1 8.2-3.8 12.9C114.1 368.3 186.3 416 276.1 416c40.2 0 84.9-10.5 116.4-30.4 4.6-2.9 4.9-8.7.1-11.3z"/>
   </svg>
 );
 
@@ -46,12 +56,14 @@ export default async function Footer() {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { name: "Twitter", href: author.twitter?.startsWith("http") ? author.twitter : `https://${author.twitter}`, icon: TwitterIcon },
-    { name: "Facebook", href: author.facebook?.startsWith("http") ? author.facebook : `https://${author.facebook}`, icon: FacebookIcon },
-    { name: "Instagram", href: author.instagram?.startsWith("http") ? author.instagram : `https://${author.instagram}`, icon: InstagramIcon },
-    { name: "LinkedIn", href: author.linkedin?.startsWith("http") ? author.linkedin : `https://${author.linkedin}`, icon: LinkedInIcon },
-    { name: "Amazon", href: author.amazon?.startsWith("http") ? author.amazon : `https://${author.amazon}`, icon: AmazonIcon },
-  ].filter(link => link.href);
+    { name: "Twitter", href: author.twitter?.startsWith("http") ? author.twitter : author.twitter && `https://${author.twitter}`, icon: TwitterIcon },
+    { name: "Facebook", href: author.facebook?.startsWith("http") ? author.facebook : author.facebook && `https://${author.facebook}`, icon: FacebookIcon },
+    { name: "Instagram", href: author.instagram?.startsWith("http") ? author.instagram : author.instagram && `https://${author.instagram}`, icon: InstagramIcon },
+    { name: "LinkedIn", href: author.linkedin?.startsWith("http") ? author.linkedin : author.linkedin && `https://${author.linkedin}`, icon: LinkedInIcon },
+    { name: "Amazon", href: author.amazon?.startsWith("http") ? author.amazon : author.amazon && `https://${author.amazon}`, icon: AmazonIcon },
+    { name: "Pinterest", href: author.pinterest?.startsWith("http") ? author.pinterest : author.pinterest && `https://${author.pinterest}`, icon: PinterestIcon },
+  ].filter(link => Boolean(link.href));
+  
   
 
   return (
@@ -72,8 +84,8 @@ export default async function Footer() {
             <ul className="space-y-2 text-sm sm:text-base text-white/80">
               <li><a href="#books" className="hover:text-white transition-colors block py-1">All Books</a></li>
               <li><a href="#about" className="hover:text-white transition-colors block py-1">About</a></li>
-              <li><a href="/privacy" className="hover:text-white transition-colors block py-1">Privacy Policy</a></li>
-              <li><a href="/terms" className="hover:text-white transition-colors block py-1">Terms</a></li>
+              <li><a href="/pinterest" className="hover:text-white transition-colors block py-1">Pinterest</a></li>
+              <li><a href="https://www.amazon.com/stores/Seth-Inin/author/B0D9QX3FCM?ref=ap_rdr&shoppingPortalEnabled=true" className="hover:text-white transition-colors block py-1">Amazon</a></li>
             </ul>
           </div>
 
@@ -93,20 +105,28 @@ export default async function Footer() {
           <div>
             <h3 className="font-bold text-base sm:text-lg mb-3 sm:mb-4">Follow {author.name}</h3>
             <div className="flex gap-4">
-              {socialLinks.map((link) => (
-                <a
-                key={link.name}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/80 hover:text-white transition-colors p-2 -m-2"
-                aria-label={link.name}
-              >
-                <link.icon className="w-6 h-6 sm:w-7 sm:h-7" />
-              </a>
-              
-              ))}
-            </div>
+                {socialLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href ?? ''}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={link.name}
+                    className={`
+                      p-2 -m-2 transition-transform hover:scale-110
+                      ${link.name === "Twitter" && "text-[#1DA1F2]"}
+                      ${link.name === "Facebook" && "text-[#1877F2]"}
+                      ${link.name === "Instagram" && "text-pink-500"}
+                      ${link.name === "LinkedIn" && "text-[#0A66C2]"}
+                      ${link.name === "Amazon" && "text-[#FF9900]"}
+                      ${link.name === "Pinterest" && "text-[#E60023]"}
+                    `}
+                  >
+                    <link.icon className="w-6 h-6 sm:w-7 sm:h-7" />
+                  </a>
+                ))}
+              </div>
+
           </div>
         </div>
 

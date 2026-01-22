@@ -17,8 +17,8 @@ export default function Header({ books }: HeaderProps) {
 
   const handleBuyClick = () => {
     if (featuredBook) {
-      trackClick(featuredBook.amazonLink, 'header', featuredBook.id);
-      window.open(featuredBook.amazonLink, '_blank');
+      trackClick('https://www.amazon.com/stores/Seth-Inin/author/B0D9QX3FCM?ref=ap_rdr&shoppingPortalEnabled=true', 'header', featuredBook.id);
+      window.open('https://www.amazon.com/stores/Seth-Inin/author/B0D9QX3FCM?ref=ap_rdr&shoppingPortalEnabled=true', '_blank');
     }
   };
 
@@ -40,7 +40,7 @@ export default function Header({ books }: HeaderProps) {
             </div>
             <div className="flex flex-col">
               <span className="text-base sm:text-lg md:text-xl font-bold text-text-primary leading-tight">
-                Faith Books
+                SethInin
               </span>
               <span className="text-xs sm:text-sm text-text-primary/60 leading-tight">
                 Spiritual Journey
@@ -48,16 +48,16 @@ export default function Header({ books }: HeaderProps) {
             </div>
           </Link>
 
-          {/* Buy on Amazon button - mobile only
-          {featuredBook && (
+           
+        
             <button
               onClick={handleBuyClick}
-              className="md:hidden btn-primary text-xs sm:text-sm py-2 px-4 sm:px-6"
-              aria-label="Buy on Amazon"
+              className=" btn-primary text-xs sm:text-sm py-2 px-4 sm:px-6"
+              aria-label="Visit Store on Amazon"
             >
-              Buy on Amazon
+              Visit Store on Amazon
             </button>
-          )} */}
+        
 
           {/* Navigation - desktop only */}
           {/* <nav className="hidden md:flex items-center gap-6">

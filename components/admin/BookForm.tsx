@@ -10,13 +10,35 @@ interface BookFormProps {
   onSave: () => void;
 }
 
-// Helpers for textarea arrays
+// Helpers for textarea arrays - handles bullet markers and newlines
 const parseTextareaToArray = (text: string | undefined | null): string[] => {
   if (!text || typeof text !== 'string') return [];
-  return text
-    .split("\n")
-    .map((line) => line.trim())
-    .filter((line) => line.length > 0);
+  
+  // Split by newlines first
+  const lines = text.split("\n");
+  const items: string[] = [];
+  
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+    
+    // Check if line starts with bullet markers: -, •, *, or numbered (1., 2., etc.)
+    const bulletMatch = trimmed.match(/^[-•*]\s+(.+)$/);
+    const numberedMatch = trimmed.match(/^\d+[.)]\s+(.+)$/);
+    
+    if (bulletMatch) {
+      // Extract text after bullet marker
+      items.push(bulletMatch[1].trim());
+    } else if (numberedMatch) {
+      // Extract text after number marker
+      items.push(numberedMatch[1].trim());
+    } else {
+      // Regular line without bullet marker
+      items.push(trimmed);
+    }
+  }
+  
+  return items.filter((item) => item.length > 0);
 };
 
 const arrayToTextarea = (arr?: string[] | null): string =>
@@ -35,17 +57,24 @@ export default function BookForm({ book, onClose, onSave }: BookFormProps) {
     coverImage: "",
     description: "",
     introduction: "",
+    introductionHeader: "",
+    introductionBodyMd: "",
     amazonLink: "",
     painPoints: "",
     painPointsHeader: "",
+    painPointsBodyMd: "",
     benefits: "",
     benefitsHeader: "",
+    benefitsBodyMd: "",
     features: "",
     featuresHeader: "",
+    featuresBodyMd: "",
     targetAudience: "",
     targetAudienceHeader: "",
+    targetAudienceBodyMd: "",
     faithMessage: "",
     faithMessageHeader: "",
+    faithMessageBodyMd: "",
     featured: false,
     order: 0,
   });
@@ -61,17 +90,24 @@ export default function BookForm({ book, onClose, onSave }: BookFormProps) {
         coverImage: book.coverImage,
         description: book.description,
         introduction: book.introduction ?? "",
+        introductionHeader: book.introductionHeader ?? "",
+        introductionBodyMd: book.introductionBodyMd ?? "",
         amazonLink: book.amazonLink,
         painPoints: arrayToTextarea(book.painPoints ?? []),
         painPointsHeader: book.painPointsHeader ?? "",
+        painPointsBodyMd: book.painPointsBodyMd ?? "",
         benefits: arrayToTextarea(book.benefits ?? []),
         benefitsHeader: book.benefitsHeader ?? "",
+        benefitsBodyMd: book.benefitsBodyMd ?? "",
         features: arrayToTextarea(book.features ?? []),
         featuresHeader: book.featuresHeader ?? "",
+        featuresBodyMd: book.featuresBodyMd ?? "",
         targetAudience: arrayToTextarea(book.targetAudience ?? []),
         targetAudienceHeader: book.targetAudienceHeader ?? "",
+        targetAudienceBodyMd: book.targetAudienceBodyMd ?? "",
         faithMessage: book.faithMessage ?? "",
         faithMessageHeader: book.faithMessageHeader ?? "",
+        faithMessageBodyMd: book.faithMessageBodyMd ?? "",
         featured: book.featured,
         order: book.order,
       });
@@ -135,17 +171,24 @@ export default function BookForm({ book, onClose, onSave }: BookFormProps) {
         coverImage: formData.coverImage,
         description: formData.description,
         introduction: safeTrim(formData.introduction),
+        introductionHeader: safeTrim(formData.introductionHeader),
+        introductionBodyMd: safeTrim(formData.introductionBodyMd),
         amazonLink: formData.amazonLink,
         painPoints: parseTextareaToArray(formData.painPoints),
         painPointsHeader: safeTrim(formData.painPointsHeader),
+        painPointsBodyMd: safeTrim(formData.painPointsBodyMd),
         benefits: parseTextareaToArray(formData.benefits),
         benefitsHeader: safeTrim(formData.benefitsHeader),
+        benefitsBodyMd: safeTrim(formData.benefitsBodyMd),
         features: parseTextareaToArray(formData.features),
         featuresHeader: safeTrim(formData.featuresHeader),
+        featuresBodyMd: safeTrim(formData.featuresBodyMd),
         targetAudience: parseTextareaToArray(formData.targetAudience),
         targetAudienceHeader: safeTrim(formData.targetAudienceHeader),
+        targetAudienceBodyMd: safeTrim(formData.targetAudienceBodyMd),
         faithMessage: safeTrim(formData.faithMessage),
         faithMessageHeader: safeTrim(formData.faithMessageHeader),
+        faithMessageBodyMd: safeTrim(formData.faithMessageBodyMd),
         featured: formData.featured,
         order: formData.order,
       };
@@ -267,8 +310,19 @@ export default function BookForm({ book, onClose, onSave }: BookFormProps) {
               </div>
 
               <div>
+              <label>
+                {`Section 2 Header (e.g., "Meet Your Faithful Goal Journal" or "Meet [Book Name]")`}
+              </label>
+
+                <input
+                  type="text"
+                  value={formData.introductionHeader}
+                  onChange={(e) => setFormData({ ...formData, introductionHeader: e.target.value })}
+                  placeholder="Meet Your Faithful Goal Journal"
+                  className="w-full px-4 py-2 border-2 border-primary-1 rounded-lg focus:outline-none focus:border-primary-2 mb-2"
+                />
                 <label className="block text-sm font-medium text-text-primary mb-2">
-                  Introduction (Meet [Book Name] section)
+                  Introduction Text
                 </label>
                 <textarea
                   value={formData.introduction}
@@ -277,6 +331,21 @@ export default function BookForm({ book, onClose, onSave }: BookFormProps) {
                   placeholder="Longer introduction text for the book details page..."
                   className="w-full px-4 py-2 border-2 border-primary-1 rounded-lg focus:outline-none focus:border-primary-2"
                 />
+                <div className="mt-3">
+                  <label className="block text-sm font-medium text-text-primary mb-2">
+                    {`Introduction Markdown (optional — use this to preserve "No pressure." style lines + bullets)`}
+                  </label>
+                  <textarea
+                    value={formData.introductionBodyMd}
+                    onChange={(e) => setFormData({ ...formData, introductionBodyMd: e.target.value })}
+                    rows={6}
+                    placeholder={"Example:\nLife moves fast.\nWorries pile up.\n\n- Bullet one\n- Bullet two\n\n**Bold** and *italic* supported."}
+                    className="w-full px-4 py-2 border-2 border-primary-1 rounded-lg focus:outline-none focus:border-primary-2 font-mono text-sm"
+                  />
+                  <p className="text-xs text-text-primary/60 mt-1">
+                    If provided, the details page will show this markdown instead of the plain Introduction Text.
+                  </p>
+                </div>
               </div>
 
               <div>
@@ -321,7 +390,24 @@ export default function BookForm({ book, onClose, onSave }: BookFormProps) {
                   placeholder="Teens feel overwhelmed by school pressure...&#10;Many struggle to understand emotions...&#10;Social comparison increases anxiety..."
                   className="w-full px-4 py-2 border-2 border-primary-1 rounded-lg focus:outline-none focus:border-primary-2 font-mono text-sm"
                 />
-                <p className="text-xs text-text-primary/60 mt-1">Enter each bullet point on a new line. Empty lines will be ignored.</p>
+                <p className="text-xs text-text-primary/60 mt-1">
+                  Enter each bullet point on a new line. You can use bullet markers (-, •, *) or numbered lists (1., 2., etc.), or just plain text. Empty lines will be ignored.
+                </p>
+                <div className="mt-3">
+                  <label className="block text-sm font-medium text-text-primary mb-2">
+                    Section 1 Markdown (optional)
+                  </label>
+                  <textarea
+                    value={formData.painPointsBodyMd}
+                    onChange={(e) => setFormData({ ...formData, painPointsBodyMd: e.target.value })}
+                    rows={6}
+                    placeholder={"Example:\nLife moves fast.\n\n● Bullet one\n● Bullet two"}
+                    className="w-full px-4 py-2 border-2 border-primary-1 rounded-lg focus:outline-none focus:border-primary-2 font-mono text-sm"
+                  />
+                  <p className="text-xs text-text-primary/60 mt-1">
+                    If provided, the details page will render this markdown instead of the Pain Points list.
+                  </p>
+                </div>
               </div>
 
               {/* Benefits Section */}
@@ -347,6 +433,20 @@ export default function BookForm({ book, onClose, onSave }: BookFormProps) {
                   className="w-full px-4 py-2 border-2 border-primary-1 rounded-lg focus:outline-none focus:border-primary-2 font-mono text-sm"
                 />
                 <p className="text-xs text-text-primary/60 mt-1">Enter each bullet point on a new line.</p>
+                <div className="mt-3">
+                  <label className="block text-sm font-medium text-text-primary mb-2">
+                    Section 3 Markdown (optional)
+                  </label>
+                  <textarea
+                    value={formData.benefitsBodyMd}
+                    onChange={(e) => setFormData({ ...formData, benefitsBodyMd: e.target.value })}
+                    rows={6}
+                    className="w-full px-4 py-2 border-2 border-primary-1 rounded-lg focus:outline-none focus:border-primary-2 font-mono text-sm"
+                  />
+                  <p className="text-xs text-text-primary/60 mt-1">
+                    If provided, the details page will render this markdown instead of the Benefits list.
+                  </p>
+                </div>
               </div>
 
               {/* Features Section */}
@@ -372,6 +472,20 @@ export default function BookForm({ book, onClose, onSave }: BookFormProps) {
                   className="w-full px-4 py-2 border-2 border-primary-1 rounded-lg focus:outline-none focus:border-primary-2 font-mono text-sm"
                 />
                 <p className="text-xs text-text-primary/60 mt-1">Enter each bullet point on a new line.</p>
+                <div className="mt-3">
+                  <label className="block text-sm font-medium text-text-primary mb-2">
+                    Section 4 Markdown (optional)
+                  </label>
+                  <textarea
+                    value={formData.featuresBodyMd}
+                    onChange={(e) => setFormData({ ...formData, featuresBodyMd: e.target.value })}
+                    rows={6}
+                    className="w-full px-4 py-2 border-2 border-primary-1 rounded-lg focus:outline-none focus:border-primary-2 font-mono text-sm"
+                  />
+                  <p className="text-xs text-text-primary/60 mt-1">
+                    If provided, the details page will render this markdown instead of the Features list.
+                  </p>
+                </div>
               </div>
 
               {/* Target Audience Section */}
@@ -397,6 +511,20 @@ export default function BookForm({ book, onClose, onSave }: BookFormProps) {
                   className="w-full px-4 py-2 border-2 border-primary-1 rounded-lg focus:outline-none focus:border-primary-2 font-mono text-sm"
                 />
                 <p className="text-xs text-text-primary/60 mt-1">Enter each bullet point on a new line.</p>
+                <div className="mt-3">
+                  <label className="block text-sm font-medium text-text-primary mb-2">
+                    Section 5 Markdown (optional)
+                  </label>
+                  <textarea
+                    value={formData.targetAudienceBodyMd}
+                    onChange={(e) => setFormData({ ...formData, targetAudienceBodyMd: e.target.value })}
+                    rows={6}
+                    className="w-full px-4 py-2 border-2 border-primary-1 rounded-lg focus:outline-none focus:border-primary-2 font-mono text-sm"
+                  />
+                  <p className="text-xs text-text-primary/60 mt-1">
+                    If provided, the details page will render this markdown instead of the Target Audience list.
+                  </p>
+                </div>
               </div>
 
               {/* Faith Message Section */}
@@ -421,6 +549,20 @@ export default function BookForm({ book, onClose, onSave }: BookFormProps) {
                   placeholder="Describe how faith is integrated in this book..."
                   className="w-full px-4 py-2 border-2 border-primary-1 rounded-lg focus:outline-none focus:border-primary-2"
                 />
+                <div className="mt-3">
+                  <label className="block text-sm font-medium text-text-primary mb-2">
+                    Section 6 Markdown (optional)
+                  </label>
+                  <textarea
+                    value={formData.faithMessageBodyMd}
+                    onChange={(e) => setFormData({ ...formData, faithMessageBodyMd: e.target.value })}
+                    rows={6}
+                    className="w-full px-4 py-2 border-2 border-primary-1 rounded-lg focus:outline-none focus:border-primary-2 font-mono text-sm"
+                  />
+                  <p className="text-xs text-text-primary/60 mt-1">
+                    If provided, the details page will render this markdown instead of the Faith Message text.
+                  </p>
+                </div>
               </div>
             </div>
           </div>

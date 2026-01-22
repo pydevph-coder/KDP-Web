@@ -53,7 +53,12 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
       ).length
     );
   }, [books, currentPage, booksPerPage, searchQuery]);
-  
+  useEffect(() => {
+    const booksSection = document.getElementById("books");
+    if (booksSection) {
+      booksSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [currentPage]);
   // Ensure books is always an array
   const booksArray = Array.isArray(books) ? books : [];
   
@@ -158,7 +163,8 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 md:gap-6 lg:gap-12">
+        {/* <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 md:gap-6 lg:gap-12"> */}
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 md:gap-6 lg:gap-12"style={{minHeight: `${Math.ceil(booksPerPage / 3) * 420}px`,}}>
           {pagedBooks.map((book) => (
             <div
               key={book.id}
