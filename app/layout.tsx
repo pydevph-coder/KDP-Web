@@ -47,10 +47,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/favicon.png" type="image/png" />
-        <link rel="icon" sizes="32x32" href="/favicon.png" />
-        <link rel="icon" sizes="16x16" href="/favicon.png" />
-        <link rel="apple-touch-icon" href="/favicon.png" />
+        <link rel="icon" href="/fabicon.png" type="image/png" />
+        <link rel="icon" sizes="32x32" href="/fabicon.png" />
+        <link rel="icon" sizes="16x16" href="/fabicon.png" />
+        <link rel="apple-touch-icon" href="/fabicon.png" />
         <meta name="theme-color" content="#F2A1B3" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
