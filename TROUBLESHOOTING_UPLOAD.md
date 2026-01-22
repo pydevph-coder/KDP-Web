@@ -113,3 +113,5 @@ Check the specific error message from the browser console or server logs and:
 3. Try creating a new test bucket to verify Supabase is working
 4. Ensure your Supabase project is active (not paused/suspended)
 
+
+
