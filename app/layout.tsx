@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     ...(siteConfig.metaImageUrl && {
       images: [
         {
-          url: siteConfig.metaImageUrl,
+          url: "https://zpavjnezltayvnysysge.supabase.co/storage/v1/object/public/book-images/book-covers/Author's%20Logo.png",
           width: 1200,
           height: 630,
           alt: siteConfig.siteTitle,
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: siteConfig.siteTitle,
     description: siteConfig.siteDescription,
     ...(siteConfig.metaImageUrl && {
-      images: [siteConfig.metaImageUrl],
+      images: ["https://zpavjnezltayvnysysge.supabase.co/storage/v1/object/public/book-images/book-covers/Author's%20Logo.png"],
     }),
   },
   viewport: {
