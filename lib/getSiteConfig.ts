@@ -11,7 +11,7 @@ export async function getSiteConfig() {
         id: 'default',
         siteTitle: 'Faith-Based Books & Guided Journals',
         siteDescription: 'Discover faith-based books and guided journals for mental wellness, written by a licensed guidance counselor.',
-        metaImageUrl: 'https://m.media-amazon.com/images/I/81bsw6fnUiL._AC_UY327_FMwebp_QL65_.jpg',
+        metaImageUrl: 'https://zpavjnezltayvnysysge.supabase.co/storage/v1/object/public/book-images/book-covers/Author%27s%20Logo.png',
         createdAt: new Date(),
         updatedAt: new Date(),
         pagination: 10,

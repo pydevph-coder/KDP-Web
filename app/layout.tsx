@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     ...(siteConfig.metaImageUrl && {
       images: [
         {
-          url: "https://zpavjnezltayvnysysge.supabase.co/storage/v1/object/public/book-images/book-covers/Author's%20Logo.png",
+          url: siteConfig.metaImageUrl,
           width: 1200,
           height: 630,
           alt: siteConfig.siteTitle,
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: siteConfig.siteTitle,
     description: siteConfig.siteDescription,
     ...(siteConfig.metaImageUrl && {
-      images: ["https://zpavjnezltayvnysysge.supabase.co/storage/v1/object/public/book-images/book-covers/Author's%20Logo.png"],
+      images: [siteConfig.metaImageUrl],
     }),
   },
   viewport: {
@@ -47,10 +47,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/fabicon.png" type="image/png" />
-        <link rel="icon" sizes="32x32" href="/fabicon.png" />
-        <link rel="icon" sizes="16x16" href="/fabicon.png" />
-        <link rel="apple-touch-icon" href="/fabicon.png" />
+        <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="icon" sizes="32x32" href="/favicon.png" />
+        <link rel="icon" sizes="16x16" href="/favicon.png" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
         <meta name="theme-color" content="#F2A1B3" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
