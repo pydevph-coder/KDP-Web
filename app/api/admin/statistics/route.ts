@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { requireAuth } from '@/lib/auth';
 
@@ -22,7 +22,7 @@ type RecentClickItem = {
   book?: { title: string } | null;
 };
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
     await requireAuth();
   } catch {
@@ -30,6 +30,27 @@ export async function GET() {
   }
 
   try {
+    const { searchParams } = new URL(request.url);
+    const startDateParam = searchParams.get('startDate');
+    const endDateParam = searchParams.get('endDate');
+
+    let dateFilter: { createdAt?: { gte?: Date; lte?: Date } } = {};
+
+    if (startDateParam || endDateParam) {
+      const gte = startDateParam ? new Date(startDateParam) : undefined;
+      const lte = endDateParam ? new Date(endDateParam) : undefined;
+
+      if (gte || lte) {
+        dateFilter.createdAt = {};
+        if (gte) dateFilter.createdAt.gte = gte;
+        if (lte) {
+          // Include the whole end date by setting time to end of day
+          lte.setHours(23, 59, 59, 999);
+          dateFilter.createdAt.lte = lte;
+        }
+      }
+    }
+
     const [
       totalClicks,
       clicksBySource,
@@ -37,22 +58,27 @@ export async function GET() {
       totalSubscribers,
       recentClicks,
     ] = await Promise.all([
-      prisma.click.count(),
+      prisma.click.count({
+        where: dateFilter,
+      }),
       prisma.click.groupBy({
         by: ['source'],
         _count: true,
+        where: dateFilter,
       }),
       prisma.click.groupBy({
         by: ['bookId'],
         _count: true,
         where: {
           bookId: { not: null },
+          ...dateFilter,
         },
       }),
       prisma.emailSubscriber.count(),
       prisma.click.findMany({
         take: 10,
         orderBy: { createdAt: 'desc' },
+        where: dateFilter,
         include: {
           book: {
             select: {

@@ -43,6 +43,26 @@ export default async function AdminDashboard() {
             <h2 className="text-xl sm:text-2xl font-bold text-text-primary mb-2">Testimonials</h2>
             <p className="text-sm sm:text-base text-text-primary/70">Manage customer reviews</p>
           </Link>
+
+          <Link
+            href="/admin/newsletter"
+            className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-md sm:shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+          >
+            <h2 className="text-xl sm:text-2xl font-bold text-text-primary mb-2">Newsletter</h2>
+            <p className="text-sm sm:text-base text-text-primary/70">
+              Email subscribers with updates, images, and free PDFs
+            </p>
+          </Link>
+
+          <Link
+            href="/admin/subscribers"
+            className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-md sm:shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+          >
+            <h2 className="text-xl sm:text-2xl font-bold text-text-primary mb-2">Subscribers</h2>
+            <p className="text-sm sm:text-base text-text-primary/70">
+              View all subscriber emails and subscription dates
+            </p>
+          </Link>
         </div>
       </div>
     </div>
