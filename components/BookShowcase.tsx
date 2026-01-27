@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { trackClick } from '@/lib/analytics';
 import { usePathname } from "next/navigation";
-// import { getSiteConfig } from "@/lib/getSiteConfig";
+import { GET } from "@/app/api/configsite/route";
 // import GET from '@/app/api/configsite/route';
 
 interface Book {
@@ -26,7 +26,16 @@ interface BookShowcaseProps {
 export default function BookShowcase({ books }: BookShowcaseProps) {
   const pathname = usePathname();
   const [myConfig, setMyConfig] = useState<any | null>(null);
-
+  const [siteConfigData, setSiteConfigData] = useState<any | null>(null);
+  useEffect(() => {
+    const fetchSiteConfig = async () => {
+      const res = await fetch('/api/configsite');
+      const data = await res.json();
+      setSiteConfigData(data);
+      console.log("SiteConfigData:", data);
+    }; 
+    fetchSiteConfig();
+  }, []);
   // Rename state to avoid shadowing the prop
   const [pagedBooks, setPagedBooks] = useState<Book[]>([]);
   const [totalBooks, setTotalBooks] = useState(0);

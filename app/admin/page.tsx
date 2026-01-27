@@ -63,6 +63,36 @@ export default async function AdminDashboard() {
               View all subscriber emails and subscription dates
             </p>
           </Link>
+
+          <Link
+            href="/admin/author"
+            className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-md sm:shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+          >
+            <h2 className="text-xl sm:text-2xl font-bold text-text-primary mb-2">Author</h2>
+            <p className="text-sm sm:text-base text-text-primary/70">
+              Edit author bio, credentials, and photo
+            </p>
+          </Link>
+
+          <Link
+            href="/admin/gallery"
+            className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-md sm:shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+          >
+            <h2 className="text-xl sm:text-2xl font-bold text-text-primary mb-2">Image Gallery</h2>
+            <p className="text-sm sm:text-base text-text-primary/70">
+              Browse uploaded images, copy URLs, and upload new assets
+            </p>
+          </Link>
+
+          <Link
+            href="/admin/site"
+            className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-md sm:shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+          >
+            <h2 className="text-xl sm:text-2xl font-bold text-text-primary mb-2">Site Settings</h2>
+            <p className="text-sm sm:text-base text-text-primary/70">
+              Manage site title, description, meta image, and pagination
+            </p>
+          </Link>
         </div>
       </div>
     </div>

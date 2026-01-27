@@ -1,34 +1,37 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { getSiteConfig } from "@/lib/getSiteConfig";
-const siteConfig = await getSiteConfig();
+import { GET } from "@/app/api/configsite/route";
 
+const siteConfig = await GET();
+const siteConfigData = await siteConfig.json();
+
+console.log("SiteConfigData:", siteConfigData);
 export const metadata: Metadata = {
-  title: `${siteConfig.siteTitle} | ${siteConfig.siteDescription}`,
-  description: siteConfig.siteDescription,
+  title: `${siteConfigData.siteTitle} | ${siteConfigData.siteDescription}`,
+  description: siteConfigData.siteDescription,
   keywords: "faith-based books, guided journals, mental wellness, Christian books, prayer journals",
-  authors: [{ name: siteConfig.siteTitle }],
+  authors: [{ name: siteConfigData.siteTitle }],
   openGraph: {
-    title: siteConfig.siteTitle,
-    description: siteConfig.siteDescription,
+    title: siteConfigData.siteTitle,
+    description: siteConfigData.siteDescription,
     type: "website",
-    ...(siteConfig.metaImageUrl && {
+    ...(siteConfigData.metaImageUrl && {
       images: [
         {
-          url: siteConfig.metaImageUrl,
+          url: siteConfigData.metaImageUrl,
           width: 1200,
           height: 630,
-          alt: siteConfig.siteTitle,
+          alt: siteConfigData.siteTitle,
         },
       ],
     }),
   },
   twitter: {
     card: "summary_large_image",
-    title: siteConfig.siteTitle,
-    description: siteConfig.siteDescription,
-    ...(siteConfig.metaImageUrl && {
-      images: [siteConfig.metaImageUrl],
+    title: siteConfigData.siteTitle,
+    description: siteConfigData.siteDescription,
+    ...(siteConfigData.metaImageUrl && {
+      images: [siteConfigData.metaImageUrl],
     }),
   },
   viewport: {
