@@ -113,7 +113,7 @@ export default async function BookDetailsPage({ params }: BookDetailsPageProps) 
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-background-1 via-background-2 to-background-1">
+    <main className="min-h-screen bg-site-gradient">
       <Header books={allBooks} />
       <BookDetailsClient book={book} />
       {testimonials.length > 0 && <Testimonials testimonials={testimonials} />}

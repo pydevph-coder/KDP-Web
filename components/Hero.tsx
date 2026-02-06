@@ -23,7 +23,7 @@ export default function Hero({ books }: HeroProps) {
   };
 
   return (
-    <section className="relative flex items-center justify-center bg-gradient-to-br from-background-1 via-background-2 to-background-1 px-4 sm:px-6 py-12 sm:py-20">
+    <section className="relative flex items-center justify-center bg-gradient-to-br from-primary-1/30 via-background-1 to-primary-2/30 px-4 sm:px-6 py-12 sm:py-20">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center">
         {/* Book Cover */}
         {/* <div className="flex justify-center md:justify-start order-2 md:order-1">

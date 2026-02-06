@@ -14,7 +14,7 @@ interface AboutAuthorProps {
 
 export default function AboutAuthor({ author }: AboutAuthorProps) {
   return (
-    <section id="about" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-white">
+    <section id="about" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-site-gradient">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-text-primary mb-8 sm:mb-12 md:mb-16">
           About the Author
@@ -48,7 +48,7 @@ export default function AboutAuthor({ author }: AboutAuthorProps) {
             {author.bio.split('\n\n').map((paragraph, index) => (
               <p
                 key={index}
-                className="text-base sm:text-lg text-text-primary/70 leading-relaxed text-left md:text-justify mb-4 last:mb-0"
+                className="text-base sm:text-lg text-text-primary/70 leading-relaxed text-justify mb-4 last:mb-0"
               >
                 {paragraph}
               </p>

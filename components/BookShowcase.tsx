@@ -134,7 +134,7 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
 
   if (setPagedBooks.length === 0) {
     return (
-      <section id="books" className="py-20 px-4 bg-white">
+      <section id="books" className="py-20 px-4 bg-site-gradient">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-text-primary mb-4">
             Our Books
@@ -149,7 +149,7 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
   }
 
   return (
-    <section id="books" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-white relative">
+    <section id="books" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-site-gradient relative">
       {/* Loading overlay */}
       {loadingBookId && (
           <div className="fixed inset-0 z-[1000] bg-black/70 flex items-center justify-center">
@@ -173,13 +173,14 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
           />
         </div>
         {/* <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 md:gap-6 lg:gap-12"> */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 md:gap-6 lg:gap-12"style={{minHeight: `${Math.ceil(booksPerPage / 3) * 420}px`,}}>
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 md:gap-6 lg:gap-12">
           {pagedBooks.map((book) => (
             <div
               key={book.id}
-              className="bg-background-1 rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-4 md:p-6 lg:p-8 shadow-md sm:shadow-lg md:hover:shadow-xl lg:hover:shadow-2xl transition-all duration-300 transform md:hover:-translate-y-2 active:scale-95 flex flex-col cursor-pointer"
+              className="bg-gradient-to-br from-primary-1/25 via-white to-primary-2/25 rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-4 md:p-6 lg:p-8 shadow-md sm:shadow-lg md:hover:shadow-xl lg:hover:shadow-2xl transition-all duration-300 transform md:hover:-translate-y-2 active:scale-95 flex flex-col cursor-pointer"
               onClick={() => handleBookClick(book.id)}
             >
+              <div className="rounded-[10px] sm:rounded-[14px] md:rounded-[18px] lg:rounded-[22px] h-full flex flex-col">
               {/* Book Cover */}
               <div className="flex justify-center mb-2 sm:mb-3 md:mb-4 lg:mb-6 group">
                 <div className="relative w-full max-w-[80px] sm:max-w-[100px] md:max-w-[140px] lg:max-w-[192px] aspect-[2/3] transform group-hover:scale-105 transition-transform duration-300">
@@ -204,22 +205,27 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
                 {book.description}
               </p> */}
 
-              {/* Desktop Description */}
-              <p className="flex-1 bg-background-2 hidden lg:block text-justify text-sm lg:text-base text-text-primary/70 mt-4 lg:mt-6 line-clamp-3 px-4 py-3 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
-                {book.description}
-              </p>
+              {/* Description + Benefits block
+                  - On desktop: fills available vertical space so buttons align
+                  - On mobile: does not stretch, to avoid large empty gaps */}
+              <div className="flex flex-col lg:flex-1">
+                {/* Desktop Description */}
+                <p className="bg-background-2 hidden lg:block text-justify text-sm lg:text-base text-text-primary/70 mt-4 lg:mt-6 line-clamp-3 px-4 py-3 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+                  {book.description}
+                </p>
 
-              {/* Desktop Benefits */}
-              {book.benefits && book.benefits.length > 0 && (
-                <ul className="flex-1 hidden lg:flex flex-col space-y-1 mb-2 sm:space-y-1.5 md:space-y-2 mb-6">
-                  {book.benefits.map((benefit, index) => (
-                    <li key={index} className="flex items-start text-sm lg:text-base">
-                      <span className="text-primary-1 mr-2 mt-0.5 flex-shrink-0">✓</span>
-                      <span className="text-text-primary/80 leading-tight">{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
+                {/* Desktop Benefits */}
+                {book.benefits && book.benefits.length > 0 && (
+                  <ul className="hidden lg:flex flex-col space-y-1 mb-6 sm:space-y-1.5 md:space-y-2 mt-3">
+                    {book.benefits.map((benefit, index) => (
+                      <li key={index} className="flex items-start text-sm lg:text-base">
+                        <span className="text-primary-1 mr-2 mt-0.5 flex-shrink-0">✓</span>
+                        <span className="text-text-primary/80 leading-tight">{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
 
               {/* Buy Button */}
               <button
@@ -227,10 +233,11 @@ export default function BookShowcase({ books }: BookShowcaseProps) {
                   e.stopPropagation(); // Prevent triggering book click
                   handleBuyClick(book.amazonLink, book.id);
                 }}
-                className="bg-primary-1 mt:auto hover:bg-primary-2 active:bg-primary-2 mt-4 lg:mt-6 text-white font-semibold text-[9px] sm:text-[10px] md:text-xs lg:text-sm py-1.5 sm:py-2 md:py-2.5 lg:py-3 px-3 sm:px-4 md:px-5 lg:px-6 rounded-full transition-all duration-300 shadow-md hover:shadow-lg items-center justify-center active:scale-95 w-full mt-auto"
+                className="bg-primary-1 hover:bg-primary-2 active:bg-primary-2 mt-3 lg:mt-auto text-white font-semibold text-[9px] sm:text-[10px] md:text-xs lg:text-sm py-1.5 sm:py-2 md:py-2.5 lg:py-3 px-3 sm:px-4 md:px-5 lg:px-6 rounded-full transition-all duration-300 shadow-md hover:shadow-lg items-center justify-center active:scale-95 w-full"
               >
                 Buy on Amazon
               </button>
+              </div>
             </div>
           ))}
           

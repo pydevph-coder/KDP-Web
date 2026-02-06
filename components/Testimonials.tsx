@@ -16,7 +16,7 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
   if (testimonials.length === 0) return null;
 
   return (
-    <section id="testimonials" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-gradient-to-br from-background-2 to-background-1">
+    <section id="testimonials" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-site-gradient">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-text-primary mb-8 sm:mb-12 md:mb-16">
           What Readers Are Saying

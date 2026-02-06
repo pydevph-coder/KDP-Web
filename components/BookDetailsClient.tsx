@@ -106,7 +106,7 @@ export default function BookDetailsClient({ book }: BookDetailsClientProps) {
 
           {/* Section 1: You're Not Alone */}
           {(book.painPointsBodyMd || (book.painPoints && book.painPoints.length > 0)) && (
-            <div className="bg-gradient-to-br from-background-1 to-background-2 rounded-xl sm:rounded-2xl p-6 sm:p-8 md:p-10 shadow-lg">
+            <div className="bg-site-gradient rounded-xl sm:rounded-2xl p-6 sm:p-8 md:p-10 shadow-lg">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-text-primary mb-6 sm:mb-8">
                 {book.painPointsHeader || "You're Not Alone"}
               </h2>
@@ -147,7 +147,7 @@ export default function BookDetailsClient({ book }: BookDetailsClientProps) {
 
           {/* Section 3: How This Book Will Help You */}
           {(book.benefitsBodyMd || (book.benefits && book.benefits.length > 0)) && (
-            <div className="bg-white/60 backdrop-blur-sm rounded-xl sm:rounded-2xl p-6 sm:p-8 md:p-10 shadow-lg">
+            <div className="bg-site-gradient rounded-xl sm:rounded-2xl p-6 sm:p-8 md:p-10 shadow-lg">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-text-primary mb-6 sm:mb-8">
                 {book.benefitsHeader || `How This ${book.title.includes('Journal') ? 'Journal' : 'Book'} Will Help You`}
               </h2>
@@ -220,7 +220,7 @@ export default function BookDetailsClient({ book }: BookDetailsClientProps) {
 
           {/* Section 6: Faith That Supports / Rooted in Faith */}
           {(book.faithMessageBodyMd || book.faithMessage) && (
-            <div className="bg-white/60 backdrop-blur-sm rounded-xl sm:rounded-2xl p-6 sm:p-8 md:p-10 shadow-lg border-l-4 border-primary-1">
+            <div className="bg-site-gradient rounded-xl sm:rounded-2xl p-6 sm:p-8 md:p-10 shadow-lg border-l-4 border-primary-1">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-text-primary mb-4 sm:mb-6">
                 {book.faithMessageHeader || (
                   book.title.includes('Teen') || book.title.includes('Overthinking') 
@@ -243,7 +243,7 @@ export default function BookDetailsClient({ book }: BookDetailsClientProps) {
           )}
 
           {/* Section 7: Begin Your Journey Today - Final CTA */}
-          <div className="text-center space-y-6 sm:space-y-8 bg-gradient-to-br from-primary-1/20 to-primary-2/20 rounded-xl sm:rounded-2xl p-8 sm:p-10 md:p-12 shadow-lg">
+          <div className="text-center space-y-6 sm:space-y-8 bg-site-gradient rounded-xl sm:rounded-2xl p-8 sm:p-10 md:p-12 shadow-lg">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-text-primary">
               Begin Your Journey Today
             </h2>

@@ -14,7 +14,10 @@
 
 body {
   color: var(--text-primary);
-  background: var(--background-1);
+  background:
+    radial-gradient(circle at top left, rgba(242, 161, 179, 0.35), rgba(250, 250, 248, 0) 55%),
+    radial-gradient(circle at bottom right, rgba(232, 222, 213, 0.6), rgba(250, 250, 248, 0) 60%),
+    var(--background-1);
   font-family: 'Inter', system-ui, sans-serif;
 }
 
@@ -25,6 +28,14 @@ h1, h2, h3, h4, h5, h6 {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* Soft site-wide gradient background similar to the reference template */
+  .bg-site-gradient {
+    background:
+      radial-gradient(circle at top left, rgba(242, 161, 179, 0.35), rgba(250, 250, 248, 0) 55%),
+      radial-gradient(circle at bottom right, rgba(232, 222, 213, 0.6), rgba(250, 250, 248, 0) 60%),
+      var(--background-1);
   }
 }
 
